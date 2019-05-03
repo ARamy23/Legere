@@ -1,5 +1,7 @@
-import FluentSQLite
+import FluentPostgreSQL
+import Leaf
 import Vapor
+import Authentication
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
@@ -67,7 +69,7 @@ private func configurePostgreDatabase(_ env: Environment) -> PostgreSQLDatabase 
         databaseName = "legere-testing"
         databasePort = 5433
     } else {
-        databaseName = "legere-meetup"
+        databaseName = "legere-staging"
         databasePort = 5432
     }
     
