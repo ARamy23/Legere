@@ -37,7 +37,7 @@ final class Article: Codable {
         self.userID = userID
         self.reads = reads
         self.likedBy = likedBy
-        self.numberOfLikes = likes.count
+        self.numberOfLikes = likedBy.count
     }
 }
 
