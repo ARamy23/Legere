@@ -26,6 +26,7 @@ struct ArticlesController: RouteCollection {
         // Update
         protectedRoutes.put(Article.parameter, use: updateHandler)
         protectedRoutes.put(Article.parameter, "read", use: didReadHandler)
+        protectedRoutes.put(Article.parameter, "like", use: didLikeHandler)
         
         // Delete
         protectedRoutes.delete(Article.parameter, use: deleteHandler)
@@ -131,6 +132,21 @@ struct ArticlesController: RouteCollection {
             return article.save(on: req)
         })
     }
+    
+    func didLikeHandler(_ req: Request) throws -> Future<Article> {
+        return try flatMap(to: Article.self,
+                           req.parameters.next(Article.self),
+                           req.content.decode(LikeData.self), { (article, likeData) in
+            if let index = article.likedBy.index(where: { $0 == likeData.userID }) {
+                article.likedBy.remove(at: index)
+            } else {
+                article.likedBy.append(likeData.userID)
+            }
+            
+            return article.save(on: req)
+        })
+        
+    }
 
     // MARK: - Delete
 
@@ -153,4 +169,8 @@ struct ArticlesController: RouteCollection {
 struct ArticleCreateData: Content {
     let title: String
     let details: String
+}
+
+struct LikeData: Content {
+    let userID: User.ID
 }
