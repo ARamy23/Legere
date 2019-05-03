@@ -85,6 +85,38 @@ final class ArticleTests: XCTestCase {
         XCTAssertEqual(returnedArticle.reads, 1)
     }
     
+    func testLikeOfAnArticle() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", decodeTo: Article.self)
+        
+        XCTAssertEqual(returnedArticle.numberOfLikes, 1)
+    }
+    
+    func testUnlikeOfAnArticle() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", decodeTo: Article.self)
+        
+        XCTAssertEqual(returnedArticle.numberOfLikes, 1)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", decodeTo: Article.self)
+        
+        XCTAssertEqual(returnedArticle2.numberOfLikes, 0)
+    }
+    
     func testDeletingAnArticle() throws {
         let article = try Article.create(on: conn)
         var articles = try app.getResponse(to: articlesURI, decodeTo: [Article].self)
