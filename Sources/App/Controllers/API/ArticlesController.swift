@@ -25,6 +25,7 @@ struct ArticlesController: RouteCollection {
         
         // Update
         protectedRoutes.put(Article.parameter, use: updateHandler)
+        protectedRoutes.put(Article.parameter, "read", use: didReadHandler)
         
         // Delete
         protectedRoutes.delete(Article.parameter, use: deleteHandler)
@@ -35,7 +36,7 @@ struct ArticlesController: RouteCollection {
 
     func createHandler(_ req: Request, articleData: ArticleCreateData) throws -> Future<Article> {
         let user = try req.requireAuthenticated(User.self)
-        let article = try Article(title: articleData.title, details: articleData.details, userID: user.requireID())
+        let article = try Article(title: articleData.title, details: articleData.details, userID: user.requireID(), reads: 0)
         return article.save(on: req)
     }
     
@@ -122,6 +123,13 @@ struct ArticlesController: RouteCollection {
                 return article.save(on: req) // 7 ~> save the old article to DB
             }
         )
+    }
+    
+    func didReadHandler(_ req: Request) throws -> Future<Article> {
+        return try req.parameters.next(Article.self).flatMap(to: Article.self, { (article) in
+            article.reads += 1
+            return article.save(on: req)
+        })
     }
 
     // MARK: - Delete
