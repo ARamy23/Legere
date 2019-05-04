@@ -8,8 +8,23 @@
 
 import Foundation
 
+enum NotValidPasswordReason {
+    case tooShort
+    case notEqualToConfirmValue
+}
+
 class NotValidPasswordError: Error, LocalizedError {
+    
+    var reason: NotValidPasswordReason?
+    
     public var errorDescription: String? {
-        return "Please enter a valid password with at least 6 characters"
+        switch reason {
+        case .tooShort?:
+            return "Please enter a valid password with at least 6 characters"
+        case .notEqualToConfirmValue?:
+            return "Passwords do not match"
+        default:
+            return "Passwords are not valid"
+        }
     }
 }

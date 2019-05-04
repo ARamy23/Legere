@@ -10,18 +10,28 @@ import Foundation
 final class IsValidPassword: BaseValidator {
     
     var value: String?
+    var confirmValue: String?
     
-    init(value: String?) {
+    init(value: String?, confirmValue: String) {
         self.value = value
     }
     
     func orThrow() throws {
         
-        if let value = value {
+        let error = NotValidPasswordError()
+        
+        if let value = value, let confirmValue = confirmValue {
             if value.count >= 6 {
                 return
             }
+            
+            if value.count < 6 {
+                error.reason = .tooShort
+            } else if confirmValue != value {
+                error.reason = .notEqualToConfirmValue
+            }
         }
-        throw NotValidPasswordError()
+        
+        throw error
     }
 }
