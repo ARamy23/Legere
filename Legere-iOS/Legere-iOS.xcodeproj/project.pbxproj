@@ -11,6 +11,7 @@
 		B8B6F39B227E0BED002C2EEC /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */; };
 		B8B6F39E227E1639002C2EEC /* MoyaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39D227E1639002C2EEC /* MoyaManager.swift */; };
 		B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A1227E281D002C2EEC /* Authentication.swift */; };
+		B8B6F3A6227E4B43002C2EEC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A5227E4B43002C2EEC /* Token.swift */; };
 		B8D62A1C227D16F3006A9933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A1B227D16F3006A9933 /* AppDelegate.swift */; };
 		B8D62A21227D16F3006A9933 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A1F227D16F3006A9933 /* Home.storyboard */; };
 		B8D62A23227D16F4006A9933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A22227D16F4006A9933 /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
 		B8B6F39D227E1639002C2EEC /* MoyaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaManager.swift; sourceTree = "<group>"; };
 		B8B6F3A1227E281D002C2EEC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		B8B6F3A5227E4B43002C2EEC /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		B8D62A18227D16F3006A9933 /* Legere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Legere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D62A1B227D16F3006A9933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8D62A20227D16F3006A9933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 			isa = PBXGroup;
 			children = (
 				B8D62AD7227E062D006A9933 /* User.swift */,
+				B8B6F3A5227E4B43002C2EEC /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -823,6 +826,7 @@
 				B8D62A96227D61A3006A9933 /* LETextField.swift in Sources */,
 				B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */,
 				B8D62AC4227DE19C006A9933 /* Fields.swift in Sources */,
+				B8B6F3A6227E4B43002C2EEC /* Token.swift in Sources */,
 				B8D62AB1227DDFBD006A9933 /* NotEmpty.swift in Sources */,
 				B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */,
 				B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */,

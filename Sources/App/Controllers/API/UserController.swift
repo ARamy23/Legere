@@ -13,6 +13,9 @@ struct UserController: RouteCollection {
         let usersRoutes = router.grouped("api", "users")
         
         // MARK: Public Routes
+        // Create
+        usersRoutes.post(User.self, use: createHandler)
+        
         // Read
         usersRoutes.get(use: getAllHandler)
         usersRoutes.get(User.parameter, use: getHandler)
@@ -28,13 +31,6 @@ struct UserController: RouteCollection {
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
         basicAuthGroup.post("login", use: loginHandler)
-        
-        let tokenAuthMiddleware = User.tokenAuthMiddleware()
-        let guardAuthMiddleware = User.guardAuthMiddleware()
-        let protectedRoutes = usersRoutes.grouped([tokenAuthMiddleware, guardAuthMiddleware])
-        
-        // Create
-        protectedRoutes.post(User.self, use: createHandler)
     }
     
     // MARK: - Create

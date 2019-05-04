@@ -30,12 +30,22 @@ extension AuthenticationService: BaseTargetType {
         }
     }
     
-    var task: Task {
+    var headers: [String : String]? {
         switch self {
         case .login(username: let username, password: let password):
-            return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
+            let loginString = "\(username):\(password)".data(using: .utf8)?.base64EncodedString() ?? ""
+            return ["Authorization": "Basic \(loginString)"]
+        default:
+            return ["Content-type": "application/json"]
+        }
+    }
+    
+    var task: Task {
+        switch self {
         case .register(name: let name, username: let username, password: let password):
             return .requestParameters(parameters: ["name": name, "username": username, "password": password], encoding: JSONEncoding.default)
+        default:
+            return .requestPlain
         }
     }
     
