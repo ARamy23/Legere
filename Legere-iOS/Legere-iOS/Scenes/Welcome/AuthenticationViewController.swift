@@ -67,7 +67,7 @@ final class AuthenticationViewController: BaseViewController {
         bindRegisterFlow()
     }
     
-    @IBAction private func didTapLogin(_ sender: Any) {
+    @IBAction func didTapLogin(_ sender: Any) {
         SwiftEntryKit.display(entry: loginFormView, using: configurePopupAttributes(
             backgroundStyle: .regular,
             animationStartPosition: .top,
@@ -75,7 +75,7 @@ final class AuthenticationViewController: BaseViewController {
             shadow: .init(color: .black, opacity: 0.16, radius: 12, offset: .zero)))
     }
     
-    @IBAction private func didTapRegister(_ sender: Any) {
+    @IBAction func didTapRegister(_ sender: Any) {
         let attributes = configurePopupAttributes(
             backgroundStyle: .dark,
             animationStartPosition: .bottom,

@@ -16,6 +16,12 @@ final class RegisterViewModel: BaseViewModel {
     var confirmPassword: Observable<String> = Observable()
     
     func register() {
-        
+        RegisterInteractor(name: name.value, username: username.value, password: password.value, confirmPassword: confirmPassword.value, base: baseInteractor).execute(User.self).then { [weak self] (user) in
+            guard let self = self else { return }
+            self.cache.saveObject(user, key: .user)
+            (self.router.presentedView as? AuthenticationViewController)?.didTapLogin(UIButton())
+            }.catch { (error) in
+                self.router.toastError(title: "Error", message: error.localizedDescription)
+        }
     }
 }
