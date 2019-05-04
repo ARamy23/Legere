@@ -12,7 +12,8 @@ target 'Legere-iOS' do
     pod 'RxCocoa'
     pod 'SimpleTwoWayBinding'
     pod 'SwiftEntryKit'
-
+    pod 'PromisesSwift'
+    pod 'SwiftMessages'
   target 'Legere-iOSTests' do
     inherit! :search_paths
     # Pods for testing

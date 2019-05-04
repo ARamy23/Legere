@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftMessages
 
 class Router: RouterProtocol {
     
@@ -37,5 +38,22 @@ class Router: RouterProtocol {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         actions.map({UIAlertAction(title: $0.title, style: $0.style, handler: nil)}).forEach({alert.addAction($0)})
         presentedView.present(alert, animated: true)
+    }
+    
+    func toastError(title: String, message: String) {
+        let view = MessageView.viewFromNib(layout: .messageView)
+        view.configureTheme(.info)
+        view.configureContent(title: title, body: message, iconImage: #imageLiteral(resourceName: "ic_alert_dark"))
+        view.configureDropShadow()
+        view.button?.isHidden = true
+        
+        var config = SwiftMessages.Config()
+        config.presentationStyle = .top
+        config.presentationContext = .window(windowLevel: .statusBar)
+        config.duration = .seconds(seconds: 3)
+        config.interactiveHide = true
+        
+        
+        SwiftMessages.show(config: config, view: view)
     }
 }

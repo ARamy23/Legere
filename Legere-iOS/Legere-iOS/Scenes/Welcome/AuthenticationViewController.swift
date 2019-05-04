@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEntryKit
+import SimpleTwoWayBinding
 
 final class AuthenticationViewController: BaseViewController {
     
@@ -17,9 +18,8 @@ final class AuthenticationViewController: BaseViewController {
     let loginFormView = LoginFormView()
     let registerFormView = RegisterFormView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var loginViewModel: LoginViewModel!
+    var registerViewModel: RegisterViewModel!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -31,14 +31,37 @@ final class AuthenticationViewController: BaseViewController {
         registerRoundView.cornerRadius = registerRoundView.height / 2
     }
     
+    fileprivate func bindLoginFlow() {
+        loginViewModel = LoginViewModel(cache: cache, router: router, network: network)
+        loginFormView.usernameTextField.textfield.bind(with: loginViewModel.username)
+        loginFormView.passwordTextfield.textfield.bind(with: loginViewModel.password)
+        
+        loginFormView.loginAction = { [weak self] in
+            guard let self = self else { return }
+            self.loginViewModel.login()
+        }
+    }
+    
+    fileprivate func bindRegisterFlow() {
+        registerViewModel = RegisterViewModel(cache: cache, router: router, network: network)
+        registerFormView.usernameTextField.textfield.bind(with: registerViewModel.username)
+        registerFormView.nameTextField.textfield.bind(with: registerViewModel.name)
+        registerFormView.passwordTextfield.textfield.bind(with: registerViewModel.password)
+        registerFormView.confirmPasswordTextfield.textfield.bind(with: registerViewModel.confirmPassword)
+        
+        registerFormView.registerAction = { [weak self] in
+            guard let self = self else { return }
+            self.registerViewModel.register()
+        }
+    }
+    
     override func bind() {
         super.bind()
-        
+        bindLoginFlow()
+        bindRegisterFlow()
     }
     
     @IBAction private func didTapLogin(_ sender: Any) {
-        
-        
         SwiftEntryKit.display(entry: loginFormView, using: configurePopupAttributes(
             backgroundStyle: .regular,
             animationStartPosition: .top,
@@ -79,7 +102,7 @@ extension AuthenticationViewController {
         
         attributes.entryInteraction = .absorbTouches
         
-        attributes.screenInteraction = .dismiss
+        attributes.screenInteraction = .absorbTouches
         
         attributes.entranceAnimation = .init(
             translate: .init(duration: 0.7, anchorPosition: animationStartPosition, spring: .init(damping: 1, initialVelocity: 0)),

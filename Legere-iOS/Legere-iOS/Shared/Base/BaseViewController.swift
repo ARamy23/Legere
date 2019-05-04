@@ -11,6 +11,7 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var cache: CacheProtocol = UserDefaultsManager()
+    var network: NetworkProtocol = MoyaManager()
     var router: RouterProtocol = Router()
     
     override func viewWillAppear(_ animated: Bool) {

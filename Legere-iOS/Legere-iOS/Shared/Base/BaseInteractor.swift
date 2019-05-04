@@ -7,35 +7,31 @@
 //
 
 import Foundation
-import RxSwift
+import Promises
 
 class BaseInteractor {
     var cache: CacheProtocol
+    var network: NetworkProtocol
     
-    init(cache: CacheProtocol) {
+    init(network: NetworkProtocol, cache: CacheProtocol) {
         self.cache = cache
+        self.network = network
     }
     
-    func execute<T: Codable>(_ model: T) -> Observable<T> {
+    func execute<T: Codable>(_ model: T.Type) -> Promise<T> {
         do {
             extract()
             try validate()
             return process(model)
         } catch let error {
-            return Observable.create({ (observer) -> Disposable in
-                observer.on(.error(error))
-                return Disposables.create()
-            })
+            return Promise<T>.init(error)
         }
     }
     
     func validate() throws {}
     func extract() {}
     
-    func process<T: Codable>(_ model: T) -> Observable<T> {
-        return Observable.create({ (observer) -> Disposable in
-            observer.on(.error(NSError(domain: "Error", code: 100, userInfo: nil)))
-            return Disposables.create()
-        })
+    func process<T: Codable>(_ model: T.Type) -> Promise<T> {
+        return Promise<T>.init(NSError(domain: "Error", code: 100, userInfo: nil))
     }
 }

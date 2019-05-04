@@ -14,14 +14,11 @@ class RegisterFormView: BaseCustomView {
     @IBOutlet weak var passwordTextfield: LETextField!
     @IBOutlet weak var confirmPasswordTextfield: LETextField!
     
-    var registerAction: ((String, String, String, String) -> Void)?
+    var registerAction: (() -> Void)?
     
     @IBAction func register(_ sender: Any) {
-        let username = usernameTextField.textfield.text ?? ""
-        let name = nameTextField.textfield.text ?? ""
-        let password = passwordTextfield.textfield.text ?? ""
-        let confirmPassword = confirmPasswordTextfield.textfield.text ?? ""
-        registerAction?(username, name, password, confirmPassword)
+        registerAction?()
+        endEditing(true)
     }
     
     override func awakeFromNib() {

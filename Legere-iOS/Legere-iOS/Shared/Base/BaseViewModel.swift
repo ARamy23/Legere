@@ -14,7 +14,9 @@ class BaseViewModel {
     
     var baseInteractor: BaseInteractor
     
-    init(cache: CacheProtocol, router: RouterProtocol) {
-        
+    init(cache: CacheProtocol, router: RouterProtocol, network: NetworkProtocol) {
+        self.cache = cache
+        self.router = router
+        self.baseInteractor = BaseInteractor(network: network, cache: cache)
     }
 }

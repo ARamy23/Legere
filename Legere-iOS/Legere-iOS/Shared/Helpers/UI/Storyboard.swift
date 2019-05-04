@@ -41,8 +41,8 @@ enum AppStoryboard: String {
         return scene
     }
     
-    func initialViewController() -> UIViewController? {
-        return instance.instantiateInitialViewController()
+    func initialViewController() -> BaseViewController {
+        return instance.instantiateInitialViewController() as? BaseViewController ?? BaseViewController()
     }
 }
 

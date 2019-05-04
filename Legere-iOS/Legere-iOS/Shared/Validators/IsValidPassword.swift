@@ -12,22 +12,23 @@ final class IsValidPassword: BaseValidator {
     var value: String?
     var confirmValue: String?
     
-    init(value: String?, confirmValue: String) {
+    init(value: String?, confirmValue: String? = nil) {
         self.value = value
+        self.confirmValue = confirmValue
     }
     
     func orThrow() throws {
         
         let error = NotValidPasswordError()
         
-        if let value = value, let confirmValue = confirmValue {
+        if let value = value {
             if value.count >= 6 {
                 return
             }
             
             if value.count < 6 {
                 error.reason = .tooShort
-            } else if confirmValue != value {
+            } else if let confirmValue = confirmValue, confirmValue != value {
                 error.reason = .notEqualToConfirmValue
             }
         }

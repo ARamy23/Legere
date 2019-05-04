@@ -9,28 +9,26 @@
 import UIKit
 
 class LoginFormView: BaseCustomView {
-    @IBOutlet weak var nameTextField: LETextField!
+    @IBOutlet weak var usernameTextField: LETextField!
     @IBOutlet weak var passwordTextfield: LETextField!
     
-    var loginAction: ((String, String) -> Void)?
+    var loginAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameTextField.textfield.placeholder = "Username"
+        usernameTextField.textfield.placeholder = "Username"
         passwordTextfield.textfield.placeholder = "Password"
         passwordTextfield.textfield.isSecureTextEntry = true
-        
     }
     
     @IBAction func login(_ sender: Any) {
-        let username = nameTextField.textfield.text ?? ""
-        let password = passwordTextfield.textfield.text ?? ""
-        loginAction?(username, password)
+        loginAction?()
+        endEditing(true)
     }
     
     init() {
         super.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width - 50, height: 50)))
-        nameTextField.textfield.placeholder = "Username"
+        usernameTextField.textfield.placeholder = "Username"
         passwordTextfield.textfield.placeholder = "Password"
         passwordTextfield.textfield.isSecureTextEntry = true
     }
