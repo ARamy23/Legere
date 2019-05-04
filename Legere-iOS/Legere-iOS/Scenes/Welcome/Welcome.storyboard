@@ -35,6 +35,9 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-FU-oSl">
                                                         <rect key="frame" x="0.0" y="0.0" width="165.5" height="165.5"/>
+                                                        <connections>
+                                                            <action selector="didTapLogin:" destination="XcN-x0-Wcj" eventType="touchUpInside" id="DnB-0N-fFc"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,6 +92,9 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-9v-NFs">
                                                         <rect key="frame" x="0.0" y="0.0" width="276" height="276"/>
+                                                        <connections>
+                                                            <action selector="didTapRegister:" destination="XcN-x0-Wcj" eventType="touchUpInside" id="Fse-1D-SNG"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

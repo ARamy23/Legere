@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LETextField" customModule="Legere_iOS" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="LYK-Xg-Jds" id="31u-am-gBP"/>
+                <outlet property="shadowView" destination="gcm-6i-7n2" id="ZbO-SM-dHT"/>
+                <outlet property="textfield" destination="DDJ-W9-enU" id="Tda-y1-mkb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcm-6i-7n2" userLabel="Shadow View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYK-Xg-Jds" userLabel="Round View">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for Articles..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DDJ-W9-enU">
+                                    <rect key="frame" x="25" y="0.0" width="325" height="50"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="DDJ-W9-enU" secondAttribute="bottom" id="Ori-Lh-QDv"/>
+                                <constraint firstAttribute="trailing" secondItem="DDJ-W9-enU" secondAttribute="trailing" constant="25" id="RMv-TG-P4r"/>
+                                <constraint firstItem="DDJ-W9-enU" firstAttribute="leading" secondItem="LYK-Xg-Jds" secondAttribute="leading" constant="25" id="fCW-Ox-na2"/>
+                                <constraint firstItem="DDJ-W9-enU" firstAttribute="top" secondItem="LYK-Xg-Jds" secondAttribute="top" id="wsp-Ke-8PL"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="LYK-Xg-Jds" secondAttribute="bottom" id="62L-Cy-GWA"/>
+                        <constraint firstItem="LYK-Xg-Jds" firstAttribute="leading" secondItem="gcm-6i-7n2" secondAttribute="leading" id="ITm-23-awa"/>
+                        <constraint firstAttribute="trailing" secondItem="LYK-Xg-Jds" secondAttribute="trailing" id="Ied-VH-r39"/>
+                        <constraint firstItem="LYK-Xg-Jds" firstAttribute="top" secondItem="gcm-6i-7n2" secondAttribute="top" id="QpT-9c-rmi"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="0.16"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="gcm-6i-7n2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="80s-g8-gV5"/>
+                <constraint firstItem="gcm-6i-7n2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="NRt-hs-bMq"/>
+                <constraint firstItem="gcm-6i-7n2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="gM2-A7-lCr"/>
+                <constraint firstItem="gcm-6i-7n2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="w3g-tV-nEJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="53.600000000000001" y="-229.38530734632684"/>
+        </view>
+    </objects>
+</document>

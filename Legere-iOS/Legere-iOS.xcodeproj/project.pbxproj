@@ -34,6 +34,12 @@
 		B8D62A87227D4BC1006A9933 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A86227D4BC1006A9933 /* StringUtils.swift */; };
 		B8D62A8A227D537F006A9933 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A89227D537F006A9933 /* Welcome.storyboard */; };
 		B8D62A8E227D5BC4006A9933 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A8D227D5BC4006A9933 /* AuthenticationViewController.swift */; };
+		B8D62A91227D60D1006A9933 /* LoginFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A90227D60D1006A9933 /* LoginFormView.xib */; };
+		B8D62A94227D6188006A9933 /* LETextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A93227D6188006A9933 /* LETextField.xib */; };
+		B8D62A96227D61A3006A9933 /* LETextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A95227D61A3006A9933 /* LETextField.swift */; };
+		B8D62A98227D64FB006A9933 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A97227D64FB006A9933 /* LoginFormView.swift */; };
+		B8D62A9C227DD58C006A9933 /* RegisterFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A9B227DD58C006A9933 /* RegisterFormView.xib */; };
+		B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A9D227DD851006A9933 /* RegisterFormView.swift */; };
 		BC49C909F908166AB5BCDB45 /* Pods_Legere_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1392E741E6751E840EDB9023 /* Pods_Legere_iOSUITests.framework */; };
 		E5E6AF9EF2DF8455CF6E5A1E /* Pods_Legere_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98753E3283AEC68D410F2855 /* Pods_Legere_iOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +101,12 @@
 		B8D62A86227D4BC1006A9933 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		B8D62A89227D537F006A9933 /* Welcome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		B8D62A8D227D5BC4006A9933 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		B8D62A90227D60D1006A9933 /* LoginFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginFormView.xib; sourceTree = "<group>"; };
+		B8D62A93227D6188006A9933 /* LETextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LETextField.xib; sourceTree = "<group>"; };
+		B8D62A95227D61A3006A9933 /* LETextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LETextField.swift; sourceTree = "<group>"; };
+		B8D62A97227D64FB006A9933 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
+		B8D62A9B227DD58C006A9933 /* RegisterFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterFormView.xib; sourceTree = "<group>"; };
+		B8D62A9D227DD851006A9933 /* RegisterFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormView.swift; sourceTree = "<group>"; };
 		C8CB09BDA0B0ACB3BDCD550B /* Pods-Legere-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Legere-iOSTests/Pods-Legere-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DEA810B56AD8E243A47847E8 /* Pods-Legere-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOS.release.xcconfig"; path = "Target Support Files/Pods-Legere-iOS/Pods-Legere-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +281,7 @@
 		B8D62A66227D1792006A9933 /* Reusable Views */ = {
 			isa = PBXGroup;
 			children = (
+				B8D62A92227D6164006A9933 /* Textfield */,
 				B8D62A67227D1792006A9933 /* Searchbar */,
 				B8D62A6A227D1792006A9933 /* BaseCustomView.swift */,
 			);
@@ -304,10 +317,47 @@
 		B8D62A88227D531E006A9933 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
-				B8D62A89227D537F006A9933 /* Welcome.storyboard */,
+				B8D62A8F227D60BC006A9933 /* Custom Views */,
 				B8D62A8D227D5BC4006A9933 /* AuthenticationViewController.swift */,
+				B8D62A89227D537F006A9933 /* Welcome.storyboard */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		B8D62A8F227D60BC006A9933 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62A9A227DD57B006A9933 /* Register */,
+				B8D62A99227DD55C006A9933 /* Login */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		B8D62A92227D6164006A9933 /* Textfield */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62A93227D6188006A9933 /* LETextField.xib */,
+				B8D62A95227D61A3006A9933 /* LETextField.swift */,
+			);
+			path = Textfield;
+			sourceTree = "<group>";
+		};
+		B8D62A99227DD55C006A9933 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62A90227D60D1006A9933 /* LoginFormView.xib */,
+				B8D62A97227D64FB006A9933 /* LoginFormView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B8D62A9A227DD57B006A9933 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62A9B227DD58C006A9933 /* RegisterFormView.xib */,
+				B8D62A9D227DD851006A9933 /* RegisterFormView.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,7 +469,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8D62A26227D16F4006A9933 /* LaunchScreen.storyboard in Resources */,
+				B8D62A9C227DD58C006A9933 /* RegisterFormView.xib in Resources */,
 				B8D62A23227D16F4006A9933 /* Assets.xcassets in Resources */,
+				B8D62A94227D6188006A9933 /* LETextField.xib in Resources */,
+				B8D62A91227D60D1006A9933 /* LoginFormView.xib in Resources */,
 				B8D62A6E227D1792006A9933 /* ArticleCollectionViewCell.xib in Resources */,
 				B8D62A21227D16F3006A9933 /* Home.storyboard in Resources */,
 				B8D62A6D227D1792006A9933 /* ArticleSearchbarView.xib in Resources */,
@@ -521,13 +574,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Legere-iOS/Pods-Legere-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleTwoWayBinding/SimpleTwoWayBinding.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -535,13 +588,13 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleTwoWayBinding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,12 +618,15 @@
 				B8D62A6C227D1792006A9933 /* ArticleSearchbarView.swift in Sources */,
 				B8D62A7F227D1F43006A9933 /* Articles.swift in Sources */,
 				B8D62A1C227D16F3006A9933 /* AppDelegate.swift in Sources */,
+				B8D62A98227D64FB006A9933 /* LoginFormView.swift in Sources */,
 				B8D62A75227D1792006A9933 /* Storyboard.swift in Sources */,
 				B8D62A74227D1792006A9933 /* HomePresenter.swift in Sources */,
 				B8D62A78227D1792006A9933 /* BaseCustomView.swift in Sources */,
 				B8D62A77227D1792006A9933 /* Searchbar.swift in Sources */,
 				B8D62A6B227D1792006A9933 /* ArticleCollectionViewCell.swift in Sources */,
+				B8D62A96227D61A3006A9933 /* LETextField.swift in Sources */,
 				B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */,
+				B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */,
 				B8D62A8E227D5BC4006A9933 /* AuthenticationViewController.swift in Sources */,
 				B8D62A84227D3482006A9933 /* Article.swift in Sources */,
 			);
