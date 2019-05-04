@@ -17,7 +17,8 @@ import UIKit
 ///
 /// let greenScene = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: GreenVC.storyboardID)
 enum AppStoryboard: String {
-    case Main
+    case Home
+    case Welcome
     
     var instance: UIStoryboard {
         
