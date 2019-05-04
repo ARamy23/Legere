@@ -24,8 +24,8 @@ final class RegisterInteractor: BaseInteractor {
     }
     
     override func validate() throws {
-        try NotEmpty(value: name, key: .nameField).orThrow()
         try NotEmpty(value: username, key: .usernameField).orThrow()
+        try NotEmpty(value: name, key: .nameField).orThrow()
         try NotEmpty(value: password, key: .passwordField).orThrow()
         try NotEmpty(value: confirmPassword, key: .confirmPasswordField).orThrow()
         try IsValidName(value: name).orThrow()

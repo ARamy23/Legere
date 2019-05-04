@@ -29,7 +29,6 @@ class RegisterFormView: BaseCustomView {
         confirmPasswordTextfield.textfield.placeholder = "Confirm Password"
         passwordTextfield.textfield.isSecureTextEntry = true
         confirmPasswordTextfield.textfield.isSecureTextEntry = true
-        
     }
     
     init() {

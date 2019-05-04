@@ -31,9 +31,25 @@ class LETextField: BaseCustomView {
     
     init() {
         super.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width - 50, height: 50)))
+        if #available(iOS 12, *) {
+            // iOS 12: Not the best solution, but it works.
+            textfield.textContentType = .oneTimeCode
+        } else {
+            // iOS 11: Disables the autofill accessory view.
+            // For more information see the explanation below.
+            textfield.textContentType = .init(rawValue: "")
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        if #available(iOS 12, *) {
+            // iOS 12: Not the best solution, but it works.
+            textfield.textContentType = .oneTimeCode
+        } else {
+            // iOS 11: Disables the autofill accessory view.
+            // For more information see the explanation below.
+            textfield.textContentType = .init(rawValue: "")
+        }
     }
 }
