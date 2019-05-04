@@ -68,7 +68,7 @@ final class ArticleTests: XCTestCase {
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: updatedArticle, loggedInUser: newUser)
         
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", decodeTo: Article.self)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.title, newTitle)
         XCTAssertEqual(returnedArticle.details, updatedArticle.details)
@@ -80,9 +80,78 @@ final class ArticleTests: XCTestCase {
         let newUser = try User.create(on: conn)
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/read", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: article, loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", decodeTo: Article.self)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.reads, 1)
+    }
+    
+    func testLikeOfAnArticleAffectsLikesCount() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        
+        XCTAssertEqual(returnedArticle.numberOfLikes, 1)
+    }
+    
+    func testUnlikeOfAnArticleAffectsLikesCount() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        
+        XCTAssertEqual(returnedArticle.numberOfLikes, 1)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        
+        XCTAssertEqual(returnedArticle2.numberOfLikes, 0)
+    }
+    
+    func testLikeOfAnArticleAffectsArticleDetailsForCurrentUser() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        
+        
+        
+        XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
+        XCTAssertTrue(returnedArticle.likes)
+    }
+    
+    func testUnlikeOfAnArticleAffectsArticleDetailsForCurrentUser() throws {
+        let newUser = try User.create(on: conn)
+        let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
+        
+        let likeData = LikeData(userID: newUser.id!)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        
+        XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
+        XCTAssertEqual(returnedArticle.likes, true)
+        
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        
+        XCTAssertEqual(returnedArticle2.article.numberOfLikes, 0)
+        XCTAssertEqual(returnedArticle2.likes, false)
     }
     
     func testDeletingAnArticle() throws {

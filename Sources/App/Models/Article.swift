@@ -20,13 +20,24 @@ final class Article: Codable {
     /// but an article can only have one author
     var userID: User.ID
     
+    /// Number of reads for this article
     var reads: Int
     
-    init(title: String, details: String, userID: User.ID, reads: Int) {
+    var likedBy: [User.ID] {
+        didSet {
+            numberOfLikes = likedBy.count
+        }
+    }
+    
+    var numberOfLikes: Int
+    
+    init(title: String, details: String, userID: User.ID, reads: Int = 0, likedBy: [User.ID] = []) {
         self.title = title
         self.details = details
         self.userID = userID
         self.reads = reads
+        self.likedBy = likedBy
+        self.numberOfLikes = likedBy.count
     }
 }
 

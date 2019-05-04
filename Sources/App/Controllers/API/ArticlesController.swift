@@ -9,7 +9,6 @@ struct ArticlesController: RouteCollection {
         // MARK: Public Routes
         // Read
         articlesRoutes.get(use: getAllHandler)
-        articlesRoutes.get(Article.parameter, use: getHandler)
         articlesRoutes.get(Article.parameter, "user", use: getUserHandler)
         articlesRoutes.get("search", use: searchHandler)
         articlesRoutes.get(Article.parameter, "categories", use: getCategoriesHandler)
@@ -19,6 +18,10 @@ struct ArticlesController: RouteCollection {
         let guardAuthMidlleware = User.guardAuthMiddleware()
         let protectedRoutes = articlesRoutes.grouped([tokenAuthMiddleware, guardAuthMidlleware])
         
+        // Read
+        
+        protectedRoutes.get(Article.parameter, use: getHandler)
+        
         // Create
         protectedRoutes.post(ArticleCreateData.self, use: createHandler)
         protectedRoutes.post(Article.parameter, "categories", Category.parameter, use: addCategoriesHandler)
@@ -26,6 +29,7 @@ struct ArticlesController: RouteCollection {
         // Update
         protectedRoutes.put(Article.parameter, use: updateHandler)
         protectedRoutes.put(Article.parameter, "read", use: didReadHandler)
+        protectedRoutes.put(Article.parameter, "like", use: didLikeHandler)
         
         // Delete
         protectedRoutes.delete(Article.parameter, use: deleteHandler)
@@ -55,10 +59,15 @@ struct ArticlesController: RouteCollection {
             .all() // 3 ~> We Specify to get everything
     }
 
-    func getHandler(_ req: Request) throws -> Future<Article> {
-        return try req // 1 ~> We take the request
-            .parameters // 2 ~> we cut it down and get the parameter (...articles/`1`)
-            .next(Article.self) // 3 ~> we map that parameter into the Article type
+    func getHandler(_ req: Request) throws -> Future<ArticleDetails> {
+        let userID = try req.requireAuthenticated(User.self).requireID()
+        return try req
+            .parameters
+            .next(Article.self)
+            .map(to: ArticleDetails.self, { (article) in
+                let isLikedByCurrentUser = article.likedBy.first(where: { $0 == userID }) != nil
+                return ArticleDetails(article: article, likes: isLikedByCurrentUser)
+            })
     }
     
     func searchHandler(_ req: Request) throws -> Future<[Article]> {
@@ -131,6 +140,21 @@ struct ArticlesController: RouteCollection {
             return article.save(on: req)
         })
     }
+    
+    func didLikeHandler(_ req: Request) throws -> Future<Article> {
+        return try flatMap(to: Article.self,
+                           req.parameters.next(Article.self),
+                           req.content.decode(LikeData.self), { (article, likeData) in
+            if let index = article.likedBy.index(where: { $0 == likeData.userID }) {
+                article.likedBy.remove(at: index)
+            } else {
+                article.likedBy.append(likeData.userID)
+            }
+            
+            return article.save(on: req)
+        })
+        
+    }
 
     // MARK: - Delete
 
@@ -153,4 +177,13 @@ struct ArticlesController: RouteCollection {
 struct ArticleCreateData: Content {
     let title: String
     let details: String
+}
+
+struct ArticleDetails: Content {
+    let article: Article
+    let likes: Bool
+}
+
+struct LikeData: Content {
+    let userID: User.ID
 }
