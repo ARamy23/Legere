@@ -40,6 +40,23 @@
 		B8D62A98227D64FB006A9933 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A97227D64FB006A9933 /* LoginFormView.swift */; };
 		B8D62A9C227DD58C006A9933 /* RegisterFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A9B227DD58C006A9933 /* RegisterFormView.xib */; };
 		B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A9D227DD851006A9933 /* RegisterFormView.swift */; };
+		B8D62AA1227DDE44006A9933 /* EmptyValueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AA0227DDE44006A9933 /* EmptyValueError.swift */; };
+		B8D62AA5227DDF7D006A9933 /* NotValidPasswordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AA2227DDF7C006A9933 /* NotValidPasswordError.swift */; };
+		B8D62AA6227DDF7D006A9933 /* NotValidEmailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AA3227DDF7C006A9933 /* NotValidEmailError.swift */; };
+		B8D62AA7227DDF7D006A9933 /* NotFoundError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AA4227DDF7C006A9933 /* NotFoundError.swift */; };
+		B8D62AAE227DDFBD006A9933 /* BaseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AA9227DDFBD006A9933 /* BaseValidator.swift */; };
+		B8D62AAF227DDFBD006A9933 /* IsValidPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AAA227DDFBD006A9933 /* IsValidPassword.swift */; };
+		B8D62AB0227DDFBD006A9933 /* IsValidEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AAB227DDFBD006A9933 /* IsValidEmail.swift */; };
+		B8D62AB1227DDFBD006A9933 /* NotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AAC227DDFBD006A9933 /* NotEmpty.swift */; };
+		B8D62AB2227DDFBD006A9933 /* NotOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AAD227DDFBD006A9933 /* NotOptional.swift */; };
+		B8D62AB5227DE088006A9933 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AB4227DE088006A9933 /* BaseViewController.swift */; };
+		B8D62ABD227DE10A006A9933 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AB9227DE10A006A9933 /* UserDefaults.swift */; };
+		B8D62ABE227DE10A006A9933 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62ABB227DE10A006A9933 /* Router.swift */; };
+		B8D62AC0227DE12F006A9933 /* ExternalProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62ABF227DE12F006A9933 /* ExternalProtocols.swift */; };
+		B8D62AC4227DE19C006A9933 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AC2227DE19C006A9933 /* Fields.swift */; };
+		B8D62AC5227DE19C006A9933 /* CachingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AC3227DE19C006A9933 /* CachingKeys.swift */; };
+		B8D62AC7227DE381006A9933 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AC6227DE381006A9933 /* BaseViewModel.swift */; };
+		B8D62AC9227DE3C7006A9933 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62AC8227DE3C7006A9933 /* BaseInteractor.swift */; };
 		BC49C909F908166AB5BCDB45 /* Pods_Legere_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1392E741E6751E840EDB9023 /* Pods_Legere_iOSUITests.framework */; };
 		E5E6AF9EF2DF8455CF6E5A1E /* Pods_Legere_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98753E3283AEC68D410F2855 /* Pods_Legere_iOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -107,6 +124,23 @@
 		B8D62A97227D64FB006A9933 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
 		B8D62A9B227DD58C006A9933 /* RegisterFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterFormView.xib; sourceTree = "<group>"; };
 		B8D62A9D227DD851006A9933 /* RegisterFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormView.swift; sourceTree = "<group>"; };
+		B8D62AA0227DDE44006A9933 /* EmptyValueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyValueError.swift; sourceTree = "<group>"; };
+		B8D62AA2227DDF7C006A9933 /* NotValidPasswordError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotValidPasswordError.swift; sourceTree = "<group>"; };
+		B8D62AA3227DDF7C006A9933 /* NotValidEmailError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotValidEmailError.swift; sourceTree = "<group>"; };
+		B8D62AA4227DDF7C006A9933 /* NotFoundError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotFoundError.swift; sourceTree = "<group>"; };
+		B8D62AA9227DDFBD006A9933 /* BaseValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseValidator.swift; sourceTree = "<group>"; };
+		B8D62AAA227DDFBD006A9933 /* IsValidPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsValidPassword.swift; sourceTree = "<group>"; };
+		B8D62AAB227DDFBD006A9933 /* IsValidEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsValidEmail.swift; sourceTree = "<group>"; };
+		B8D62AAC227DDFBD006A9933 /* NotEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotEmpty.swift; sourceTree = "<group>"; };
+		B8D62AAD227DDFBD006A9933 /* NotOptional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotOptional.swift; sourceTree = "<group>"; };
+		B8D62AB4227DE088006A9933 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B8D62AB9227DE10A006A9933 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		B8D62ABB227DE10A006A9933 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B8D62ABF227DE12F006A9933 /* ExternalProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalProtocols.swift; sourceTree = "<group>"; };
+		B8D62AC2227DE19C006A9933 /* Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fields.swift; sourceTree = "<group>"; };
+		B8D62AC3227DE19C006A9933 /* CachingKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingKeys.swift; sourceTree = "<group>"; };
+		B8D62AC6227DE381006A9933 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		B8D62AC8227DE3C7006A9933 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
 		C8CB09BDA0B0ACB3BDCD550B /* Pods-Legere-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Legere-iOSTests/Pods-Legere-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DEA810B56AD8E243A47847E8 /* Pods-Legere-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOS.release.xcconfig"; path = "Target Support Files/Pods-Legere-iOS/Pods-Legere-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +288,11 @@
 		B8D62A62227D1792006A9933 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B8D62AC1227DE19C006A9933 /* Keys */,
+				B8D62AB6227DE0E5006A9933 /* Externals */,
+				B8D62AB3227DE062006A9933 /* Base */,
+				B8D62AA8227DDFA7006A9933 /* Validators */,
+				B8D62A9F227DDE26006A9933 /* Errors */,
 				B8D62A79227D1AA3006A9933 /* Networking */,
 				B8D62A63227D1792006A9933 /* Helpers */,
 				B8D62A66227D1792006A9933 /* Reusable Views */,
@@ -358,6 +397,74 @@
 				B8D62A9D227DD851006A9933 /* RegisterFormView.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		B8D62A9F227DDE26006A9933 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62AA0227DDE44006A9933 /* EmptyValueError.swift */,
+				B8D62AA4227DDF7C006A9933 /* NotFoundError.swift */,
+				B8D62AA3227DDF7C006A9933 /* NotValidEmailError.swift */,
+				B8D62AA2227DDF7C006A9933 /* NotValidPasswordError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		B8D62AA8227DDFA7006A9933 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62AA9227DDFBD006A9933 /* BaseValidator.swift */,
+				B8D62AAB227DDFBD006A9933 /* IsValidEmail.swift */,
+				B8D62AAA227DDFBD006A9933 /* IsValidPassword.swift */,
+				B8D62AAC227DDFBD006A9933 /* NotEmpty.swift */,
+				B8D62AAD227DDFBD006A9933 /* NotOptional.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		B8D62AB3227DE062006A9933 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62AB4227DE088006A9933 /* BaseViewController.swift */,
+				B8D62AC6227DE381006A9933 /* BaseViewModel.swift */,
+				B8D62AC8227DE3C7006A9933 /* BaseInteractor.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B8D62AB6227DE0E5006A9933 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62ABF227DE12F006A9933 /* ExternalProtocols.swift */,
+				B8D62AB7227DE10A006A9933 /* Cache */,
+				B8D62ABA227DE10A006A9933 /* Router */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		B8D62AB7227DE10A006A9933 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62AB9227DE10A006A9933 /* UserDefaults.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		B8D62ABA227DE10A006A9933 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62ABB227DE10A006A9933 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B8D62AC1227DE19C006A9933 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62AC2227DE19C006A9933 /* Fields.swift */,
+				B8D62AC3227DE19C006A9933 /* CachingKeys.swift */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -613,21 +720,38 @@
 				B8D62A7B227D1ADD006A9933 /* Base Service.swift in Sources */,
 				B8D62A70227D1792006A9933 /* HomeViewController.swift in Sources */,
 				B8D62A72227D1792006A9933 /* HomeWorker.swift in Sources */,
+				B8D62AC0227DE12F006A9933 /* ExternalProtocols.swift in Sources */,
+				B8D62AC7227DE381006A9933 /* BaseViewModel.swift in Sources */,
+				B8D62ABD227DE10A006A9933 /* UserDefaults.swift in Sources */,
+				B8D62AA1227DDE44006A9933 /* EmptyValueError.swift in Sources */,
+				B8D62AB5227DE088006A9933 /* BaseViewController.swift in Sources */,
+				B8D62AA7227DDF7D006A9933 /* NotFoundError.swift in Sources */,
 				B8D62A87227D4BC1006A9933 /* StringUtils.swift in Sources */,
 				B8D62A71227D1792006A9933 /* HomeRouter.swift in Sources */,
 				B8D62A6C227D1792006A9933 /* ArticleSearchbarView.swift in Sources */,
+				B8D62AAF227DDFBD006A9933 /* IsValidPassword.swift in Sources */,
 				B8D62A7F227D1F43006A9933 /* Articles.swift in Sources */,
 				B8D62A1C227D16F3006A9933 /* AppDelegate.swift in Sources */,
+				B8D62AB2227DDFBD006A9933 /* NotOptional.swift in Sources */,
 				B8D62A98227D64FB006A9933 /* LoginFormView.swift in Sources */,
 				B8D62A75227D1792006A9933 /* Storyboard.swift in Sources */,
+				B8D62AA5227DDF7D006A9933 /* NotValidPasswordError.swift in Sources */,
 				B8D62A74227D1792006A9933 /* HomePresenter.swift in Sources */,
+				B8D62AB0227DDFBD006A9933 /* IsValidEmail.swift in Sources */,
 				B8D62A78227D1792006A9933 /* BaseCustomView.swift in Sources */,
+				B8D62ABE227DE10A006A9933 /* Router.swift in Sources */,
 				B8D62A77227D1792006A9933 /* Searchbar.swift in Sources */,
+				B8D62AC9227DE3C7006A9933 /* BaseInteractor.swift in Sources */,
 				B8D62A6B227D1792006A9933 /* ArticleCollectionViewCell.swift in Sources */,
+				B8D62AC5227DE19C006A9933 /* CachingKeys.swift in Sources */,
 				B8D62A96227D61A3006A9933 /* LETextField.swift in Sources */,
+				B8D62AC4227DE19C006A9933 /* Fields.swift in Sources */,
+				B8D62AB1227DDFBD006A9933 /* NotEmpty.swift in Sources */,
 				B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */,
 				B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */,
 				B8D62A8E227D5BC4006A9933 /* AuthenticationViewController.swift in Sources */,
+				B8D62AAE227DDFBD006A9933 /* BaseValidator.swift in Sources */,
+				B8D62AA6227DDF7D006A9933 /* NotValidEmailError.swift in Sources */,
 				B8D62A84227D3482006A9933 /* Article.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
