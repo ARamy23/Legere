@@ -1,6 +1,6 @@
 //
 //  HomePresenter.swift
-//  Today-I-Read-App
+//  Legere
 //
 //  Created by Ahmed Ramy on 5/3/19.
 //  Copyright (c) 2019 Ahmed Ramy. All rights reserved.
@@ -14,18 +14,24 @@ import UIKit
 
 protocol HomePresentationLogic
 {
-  func presentSomething(response: Home.Something.Response)
+    func presentSomething(response: Home.Something.Response)
+    func presentArticles(articles: Articles)
 }
 
 class HomePresenter: HomePresentationLogic
 {
-  weak var viewController: HomeDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Home.Something.Response)
-  {
-    let viewModel = Home.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: HomeDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentSomething(response: Home.Something.Response)
+    {
+        let viewModel = Home.Something.ViewModel()
+        viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentArticles(articles: Articles) {
+        let viewModel = Home.Feed.ViewModel(articles: articles)
+        viewController?.displayArticles(viewModel: viewModel)
+    }
 }

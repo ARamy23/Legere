@@ -5775,27 +5775,6 @@
 			remoteGlobalIDString = "Legere::AppTests";
 			remoteInfo = AppTests;
 		};
-		B8D62A4F227D16F5006A9933 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B8D62A18227D16F3006A9933;
-			remoteInfo = "Legere-iOS";
-		};
-		B8D62A51227D16F5006A9933 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B8D62A2C227D16F4006A9933;
-			remoteInfo = "Legere-iOSTests";
-		};
-		B8D62A53227D16F5006A9933 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B8D62A37227D16F4006A9933;
-			remoteInfo = "Legere-iOSUITests";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -5805,7 +5784,6 @@
 		B8D629C0227CB9BE006A9933 /* Models+Testable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Models+Testable.swift"; sourceTree = "<group>"; };
 		B8D629C1227CB9BE006A9933 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		B8D629C2227CB9BE006A9933 /* Application+Testable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Application+Testable.swift"; sourceTree = "<group>"; };
-		B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Legere-iOS.xcodeproj"; path = "Legere-iOS/Legere-iOS.xcodeproj"; sourceTree = "<group>"; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Logging::Product" /* Logging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7583,16 +7561,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B8D62A4A227D16F4006A9933 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B8D62A50227D16F5006A9933 /* Legere-iOS.app */,
-				B8D62A52227D16F5006A9933 /* Legere-iOSTests.xctest */,
-				B8D62A54227D16F5006A9933 /* Legere-iOSUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		OBJ_10 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -8589,10 +8557,9 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_28 /* Tests */,
@@ -8600,7 +8567,6 @@
 				OBJ_32 /* Dependencies */,
 				OBJ_975 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_501 /* Utilities */ = {
@@ -11876,15 +11842,9 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_975 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B8D62A4A227D16F4006A9933 /* Products */;
-					ProjectRef = B8D62A49227D16F4006A9933 /* Legere-iOS.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				"Legere::App" /* App */,
@@ -11962,30 +11922,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B8D62A50227D16F5006A9933 /* Legere-iOS.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Legere-iOS.app";
-			remoteRef = B8D62A4F227D16F5006A9933 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B8D62A52227D16F5006A9933 /* Legere-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Legere-iOSTests.xctest";
-			remoteRef = B8D62A51227D16F5006A9933 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B8D62A54227D16F5006A9933 /* Legere-iOSUITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Legere-iOSUITests.xctest";
-			remoteRef = B8D62A53227D16F5006A9933 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_1028 /* Sources */ = {

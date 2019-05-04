@@ -1,6 +1,6 @@
 //
 //  HomeInteractor.swift
-//  Today-I-Read-App
+//  Legere
 //
 //  Created by Ahmed Ramy on 5/3/19.
 //  Copyright (c) 2019 Ahmed Ramy. All rights reserved.
@@ -11,31 +11,47 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol HomeBusinessLogic
 {
-  func doSomething(request: Home.Something.Request)
+    var serviceManager: ArticlesServiceManager { get set }
+    func doSomething(request: Home.Something.Request)
+    func getAllArticles(endpoint: ArticlesService)
 }
 
 protocol HomeDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
 {
-  var presenter: HomePresentationLogic?
-  var worker: HomeWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: Home.Something.Request)
-  {
-    worker = HomeWorker()
-    worker?.doSomeWork()
+    var presenter: HomePresentationLogic?
+    var worker: HomeWorker?
+    let disposeBag: DisposeBag = DisposeBag()
+    var serviceManager: ArticlesServiceManager = ArticlesServiceManager()
     
-    let response = Home.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    //var name: String = ""
+    
+    // MARK: Do something
+    
+    func doSomething(request: Home.Something.Request)
+    {
+        worker = HomeWorker()
+        worker?.doSomeWork()
+        
+        let response = Home.Something.Response()
+        presenter?.presentSomething(response: response)
+    }
+    
+    
+    func getAllArticles(endpoint: ArticlesService) {
+        serviceManager.provider.rx.request(endpoint).asObservable().map(Articles.self).subscribe(onNext: { [weak self] (articles) in
+            guard let self = self else { return }
+            self.presenter?.presentArticles(articles: articles)
+        }, onError: { (error) in
+            fatalError(error.localizedDescription)
+        }).disposed(by: disposeBag)
+    }
 }
