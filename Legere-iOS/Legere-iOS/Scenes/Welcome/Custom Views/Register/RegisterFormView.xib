@@ -57,6 +57,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="darkMood" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSensetiveDataField" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Cg-6K-TCc" customClass="LETextField" customModule="Legere_iOS" customModuleProvider="target">
@@ -66,6 +67,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="darkMood" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSensetiveDataField" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>

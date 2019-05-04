@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backgroundView" destination="LYK-Xg-Jds" id="31u-am-gBP"/>
                 <outlet property="shadowView" destination="gcm-6i-7n2" id="ZbO-SM-dHT"/>
+                <outlet property="showHideEntryButton" destination="awc-5D-TeG" id="ZyA-Fk-RS9"/>
                 <outlet property="textfield" destination="DDJ-W9-enU" id="Tda-y1-mkb"/>
             </connections>
         </placeholder>
@@ -28,19 +29,35 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYK-Xg-Jds" userLabel="Round View">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for Articles..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DDJ-W9-enU">
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BXD-vK-6zv">
                                     <rect key="frame" x="25" y="0.0" width="325" height="50"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for Articles..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DDJ-W9-enU">
+                                            <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awc-5D-TeG">
+                                            <rect key="frame" x="0.0" y="0.0" width="44" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="LGH-Ru-h4p"/>
+                                                <constraint firstAttribute="height" constant="44" id="bqV-lN-33l"/>
+                                            </constraints>
+                                            <state key="normal" image="ic_read"/>
+                                            <connections>
+                                                <action selector="showHideEntry" destination="-1" eventType="touchUpInside" id="aYg-rf-a0L"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="DDJ-W9-enU" secondAttribute="bottom" id="Ori-Lh-QDv"/>
-                                <constraint firstAttribute="trailing" secondItem="DDJ-W9-enU" secondAttribute="trailing" constant="25" id="RMv-TG-P4r"/>
-                                <constraint firstItem="DDJ-W9-enU" firstAttribute="leading" secondItem="LYK-Xg-Jds" secondAttribute="leading" constant="25" id="fCW-Ox-na2"/>
-                                <constraint firstItem="DDJ-W9-enU" firstAttribute="top" secondItem="LYK-Xg-Jds" secondAttribute="top" id="wsp-Ke-8PL"/>
+                                <constraint firstItem="BXD-vK-6zv" firstAttribute="top" secondItem="LYK-Xg-Jds" secondAttribute="top" id="38o-Xp-F02"/>
+                                <constraint firstItem="BXD-vK-6zv" firstAttribute="leading" secondItem="LYK-Xg-Jds" secondAttribute="leading" constant="25" id="J8k-A2-zfY"/>
+                                <constraint firstAttribute="bottom" secondItem="BXD-vK-6zv" secondAttribute="bottom" id="KH4-Ua-geG"/>
+                                <constraint firstAttribute="trailing" secondItem="BXD-vK-6zv" secondAttribute="trailing" constant="25" id="ULT-ll-bJF"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -82,4 +99,7 @@
             <point key="canvasLocation" x="53.600000000000001" y="-229.38530734632684"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_read" width="30" height="30"/>
+    </resources>
 </document>

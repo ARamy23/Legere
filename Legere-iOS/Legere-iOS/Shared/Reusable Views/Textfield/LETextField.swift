@@ -11,6 +11,7 @@ import UIKit
 class LETextField: BaseCustomView {
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var showHideEntryButton: UIButton!
     @IBOutlet weak var textfield: UITextField!
     
     @IBInspectable var darkMood: Bool = false {
@@ -27,6 +28,19 @@ class LETextField: BaseCustomView {
                 textfield.setPlaceHolderTextColor(#colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 0.5))
             }
         }
+    }
+    
+    @IBInspectable var isSensetiveDataField: Bool = false {
+        didSet {
+            textfield.isSecureTextEntry = isSensetiveDataField
+            showHideEntryButton.isHidden = !isSensetiveDataField
+        }
+    }
+    
+    @IBAction func showHideEntry() {
+        textfield.isSecureTextEntry.toggle()
+        let image = (textfield.isSecureTextEntry) ? #imageLiteral(resourceName: "ic_read") : #imageLiteral(resourceName: "ic_hide_password")
+        showHideEntryButton.setImage(image, for: .normal)
     }
     
     init() {
