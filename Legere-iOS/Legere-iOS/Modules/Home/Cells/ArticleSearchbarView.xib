@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleSearchbarView" customModule="Today_I_Read_App" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ArticleSearchbarView" customModule="Today_I_Read_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="379" height="111"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pb-9d-E1n" userLabel="Shadow View">
+                    <rect key="frame" x="25" y="25" width="329" height="61"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pON-zk-ri3" userLabel="Round View">
+                            <rect key="frame" x="0.0" y="0.0" width="329" height="61"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for Articles..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6KW-v9-fXa">
+                                    <rect key="frame" x="25" y="0.0" width="279" height="61"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="6KW-v9-fXa" firstAttribute="leading" secondItem="pON-zk-ri3" secondAttribute="leading" constant="25" id="7qu-WS-4O4"/>
+                                <constraint firstItem="6KW-v9-fXa" firstAttribute="top" secondItem="pON-zk-ri3" secondAttribute="top" id="A6x-z2-cc9"/>
+                                <constraint firstAttribute="trailing" secondItem="6KW-v9-fXa" secondAttribute="trailing" constant="25" id="DiT-Qu-ErW"/>
+                                <constraint firstAttribute="bottom" secondItem="6KW-v9-fXa" secondAttribute="bottom" id="NfL-5j-rzp"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="pON-zk-ri3" secondAttribute="bottom" id="3G8-gT-1zb"/>
+                        <constraint firstItem="pON-zk-ri3" firstAttribute="top" secondItem="8Pb-9d-E1n" secondAttribute="top" id="MGe-Lh-0Cg"/>
+                        <constraint firstItem="pON-zk-ri3" firstAttribute="leading" secondItem="8Pb-9d-E1n" secondAttribute="leading" id="lEE-HV-P7y"/>
+                        <constraint firstAttribute="trailing" secondItem="pON-zk-ri3" secondAttribute="trailing" id="vPs-fL-r8W"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="0.16"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="8Pb-9d-E1n" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" constant="25" id="9J6-vs-6ZF"/>
+                <constraint firstItem="8Pb-9d-E1n" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="25" id="a7F-Tk-fCV"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="8Pb-9d-E1n" secondAttribute="bottom" constant="25" id="ihd-oA-z3l"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="8Pb-9d-E1n" secondAttribute="trailing" constant="25" id="yEV-Ug-vJr"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <point key="canvasLocation" x="184.80000000000001" y="156.97151424287858"/>
+        </collectionReusableView>
+    </objects>
+</document>
