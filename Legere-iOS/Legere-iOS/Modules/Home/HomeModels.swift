@@ -1,6 +1,6 @@
 //
 //  HomeModels.swift
-//  Today-I-Read-App
+//  Legere
 //
 //  Created by Ahmed Ramy on 5/3/19.
 //  Copyright (c) 2019 Ahmed Ramy. All rights reserved.
@@ -14,18 +14,24 @@ import UIKit
 
 enum Home
 {
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum Something
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+        }
+        struct ViewModel
+        {
+        }
     }
-    struct Response
-    {
+    
+    enum Feed {
+        struct ViewModel {
+            var articles: Articles
+        }
     }
-    struct ViewModel
-    {
-    }
-  }
 }

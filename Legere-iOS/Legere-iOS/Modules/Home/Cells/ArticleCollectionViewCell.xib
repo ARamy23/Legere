@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticleCollectionViewCell" id="gTV-IL-0wX" customClass="ArticleCollectionViewCell" customModule="Today_I_Read_App" customModuleProvider="target">
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticleCollectionViewCell" id="gTV-IL-0wX" customClass="ArticleCollectionViewCell" customModule="Legere_iOS" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="326" height="301"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -182,7 +182,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="506" height="441"/>
             <connections>
+                <outlet property="breifTextView" destination="HkG-w6-XUM" id="dxR-pc-9Ci"/>
+                <outlet property="likesCountLabel" destination="ngf-nC-Coh" id="iWd-yV-3dc"/>
+                <outlet property="readCountLabel" destination="k4g-0M-54N" id="OMm-QP-Pyf"/>
                 <outlet property="socialBarView" destination="Idb-7y-M0s" id="thg-2i-KJF"/>
+                <outlet property="titleLabel" destination="FOT-2P-ygo" id="tPX-Xc-IBH"/>
             </connections>
             <point key="canvasLocation" x="180.80000000000001" y="116.49175412293854"/>
         </collectionViewCell>

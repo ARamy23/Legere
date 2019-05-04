@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  Today-I-Read-App
+//  Legere
 //
 //  Created by Ahmed Ramy on 5/3/19.
 //  Copyright (c) 2019 Ahmed Ramy. All rights reserved.
@@ -16,14 +16,20 @@ import SwifterSwift
 protocol HomeDisplayLogic: class
 {
     func displaySomething(viewModel: Home.Something.ViewModel)
+    func displayArticles(viewModel: Home.Feed.ViewModel)
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic
 {
     @IBOutlet weak var feedCollectionView: UICollectionView!
     
+    var refresher: UIRefreshControl!
+    
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
+    
+    // MARK: Datasource
+    var articles: Articles = []
     
     // MARK: Object lifecycle
     
@@ -74,7 +80,8 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         super.viewDidLoad()
         setupNavbar()
         setupCollectionView()
-        doSomething()
+        setupPullToRefresh()
+        getAllArticles()
     }
     
     // MARK: Do something
@@ -93,6 +100,18 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         self.feedCollectionView.register(nibWithCellClass: ArticleCollectionViewCell.self)
     }
     
+    private func setupPullToRefresh() {
+        self.refresher = UIRefreshControl()
+        self.feedCollectionView.alwaysBounceVertical = true
+        self.refresher.tintColor = UIColor.black
+        self.refresher.addTarget(self, action: #selector(refreshArticles), for: .valueChanged)
+        self.feedCollectionView.addSubview(refresher)
+    }
+    
+    @objc private func refreshArticles() {
+        getAllArticles()
+    }
+    
     //@IBOutlet weak var nameTextField: UITextField!
     
     func doSomething()
@@ -101,9 +120,19 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         interactor?.doSomething(request: request)
     }
     
+    func getAllArticles() {
+        interactor?.getAllArticles(endpoint: .allArticles)
+    }
+    
     func displaySomething(viewModel: Home.Something.ViewModel)
     {
         //nameTextField.text = viewModel.name
+    }
+    
+    func displayArticles(viewModel: Home.Feed.ViewModel) {
+        self.articles = viewModel.articles
+        self.feedCollectionView.reloadData()
+        self.refresher.endRefreshing()
     }
 }
 
@@ -119,19 +148,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return articles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: ArticleCollectionViewCell.self, for: indexPath)
+        cell.article = articles[indexPath.row]
         return cell
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let article = articles[indexPath.row]
         let width: CGFloat = self.view.width - 50
-        let height: CGFloat = 320
-        return CGSize(width: width, height: height)
+        let height: CGFloat = article.details?.height(withConstrainedWidth: width, font: .systemFont(ofSize: 17, weight: .light)) ?? 0.0
+        return CGSize(width: width, height: height + 169 + 40)
     }
 }
