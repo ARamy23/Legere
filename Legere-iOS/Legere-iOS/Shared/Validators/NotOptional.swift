@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NotOptional: BaseValidator {
+final class NotOptional: BaseValidator {
     
     var value: Any?
     var key: String

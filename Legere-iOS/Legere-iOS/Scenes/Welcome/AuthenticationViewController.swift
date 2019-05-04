@@ -9,10 +9,13 @@
 import UIKit
 import SwiftEntryKit
 
-class AuthenticationViewController: UIViewController {
+final class AuthenticationViewController: BaseViewController {
     
     @IBOutlet weak var loginRoundView: UIView!
     @IBOutlet weak var registerRoundView: UIView!
+    
+    let loginFormView = LoginFormView()
+    let registerFormView = RegisterFormView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +23,43 @@ class AuthenticationViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func initialize() {
+        super.initialize()
         loginRoundView.cornerRadius = loginRoundView.height / 2
         registerRoundView.cornerRadius = registerRoundView.height / 2
     }
     
+    override func bind() {
+        super.bind()
+        
+    }
+    
+    @IBAction private func didTapLogin(_ sender: Any) {
+        
+        
+        SwiftEntryKit.display(entry: loginFormView, using: configurePopupAttributes(
+            backgroundStyle: .regular,
+            animationStartPosition: .top,
+            animationEndPosition: .bottom,
+            shadow: .init(color: .black, opacity: 0.16, radius: 12, offset: .zero)))
+    }
+    
+    @IBAction private func didTapRegister(_ sender: Any) {
+        let attributes = configurePopupAttributes(
+            backgroundStyle: .dark,
+            animationStartPosition: .bottom,
+            animationEndPosition: .top,
+            shadow: .init(color: .black, opacity: 1, radius: 20, offset: .zero))
+        
+        SwiftEntryKit.display(entry: registerFormView, using: attributes)
+    }
+}
+
+
+// MARK : - Popup Configurations
+extension AuthenticationViewController {
     private func configurePopupAttributes(backgroundStyle: UIBlurEffect.Style, animationStartPosition: EKAttributes.Animation.Translate.AnchorPosition, animationEndPosition: EKAttributes.Animation.Translate.AnchorPosition, shadow: EKAttributes.Shadow.Value) -> EKAttributes {
         var attributes = EKAttributes()
         
@@ -59,26 +95,5 @@ class AuthenticationViewController: UIViewController {
         attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .jolt)
         
         return attributes
-    }
-    
-    @IBAction private func didTapLogin(_ sender: Any) {
-        let loginFormView = LoginFormView()
-        
-        SwiftEntryKit.display(entry: loginFormView, using: configurePopupAttributes(
-            backgroundStyle: .regular,
-            animationStartPosition: .top,
-            animationEndPosition: .bottom,
-            shadow: .init(color: .black, opacity: 0.16, radius: 12, offset: .zero)))
-    }
-    
-    @IBAction private func didTapRegister(_ sender: Any) {
-        let registerFormView = RegisterFormView()
-        let attributes = configurePopupAttributes(
-            backgroundStyle: .dark,
-            animationStartPosition: .bottom,
-            animationEndPosition: .top,
-            shadow: .init(color: .black, opacity: 1, radius: 20, offset: .zero))
-        
-        SwiftEntryKit.display(entry: registerFormView, using: attributes)
     }
 }

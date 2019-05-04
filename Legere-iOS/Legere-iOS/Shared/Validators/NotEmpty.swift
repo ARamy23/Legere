@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NotEmpty: BaseValidator {
+final class NotEmpty: BaseValidator {
     
     var value: Any?
     var key: String

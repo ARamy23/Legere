@@ -11,8 +11,10 @@ import Foundation
 extension String {
     
     // MARK: - Welcome Module
-    static let emailField = "email"
+    static let nameField = "name"
+    static let usernameField = "username"
     static let passwordField = "password"
+    static let confirmPasswordField = "confirmPassword"
     
     // MARK: - Home Module
 }

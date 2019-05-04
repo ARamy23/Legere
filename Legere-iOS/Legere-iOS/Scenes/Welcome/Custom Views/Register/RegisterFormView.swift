@@ -14,7 +14,7 @@ class RegisterFormView: BaseCustomView {
     @IBOutlet weak var passwordTextfield: LETextField!
     @IBOutlet weak var confirmPasswordTextfield: LETextField!
     
-    var registerAction: ((_ username: String, _ name: String, _ password: String, _ confirmPassword: String) -> Void)?
+    var registerAction: ((String, String, String, String) -> Void)?
     
     @IBAction func register(_ sender: Any) {
         let username = usernameTextField.textfield.text ?? ""

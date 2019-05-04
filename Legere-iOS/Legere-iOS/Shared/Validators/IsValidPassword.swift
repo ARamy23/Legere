@@ -7,7 +7,7 @@
 
 import Foundation
 
-class IsValidPassword: BaseValidator {
+final class IsValidPassword: BaseValidator {
     
     var value: String?
     
@@ -18,7 +18,7 @@ class IsValidPassword: BaseValidator {
     func orThrow() throws {
         
         if let value = value {
-            if value.count >= 8 {
+            if value.count >= 6 {
                 return
             }
         }
