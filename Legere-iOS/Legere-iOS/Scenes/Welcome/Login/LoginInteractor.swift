@@ -27,6 +27,6 @@ final class LoginInteractor: BaseInteractor {
     }
     
     override func process<T>(_ model: T.Type) -> Promise<T> where T : Decodable, T : Encodable {
-        return network.callModel(model: model, api: ArticlesService.allArticles)
+        return network.callModel(model: model, api: AuthenticationService.login(username: username ?? "", password: password ?? ""))
     }
 }

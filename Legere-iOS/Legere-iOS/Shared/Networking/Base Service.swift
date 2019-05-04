@@ -19,6 +19,10 @@ extension BaseTargetType {
     var headers: [String: String]? {
         return ["Content-type": "application/json"]
     }
+    
+    var sampleData: Data {
+        return Data()
+    }
 }
 
 // MARK: - Helper

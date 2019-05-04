@@ -10,6 +10,7 @@
 		5438FB8AD7B9FA0483646910 /* Pods_Legere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388AF8CAA609B0EFA8A56BB1 /* Pods_Legere_iOS.framework */; };
 		B8B6F39B227E0BED002C2EEC /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */; };
 		B8B6F39E227E1639002C2EEC /* MoyaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39D227E1639002C2EEC /* MoyaManager.swift */; };
+		B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A1227E281D002C2EEC /* Authentication.swift */; };
 		B8D62A1C227D16F3006A9933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A1B227D16F3006A9933 /* AppDelegate.swift */; };
 		B8D62A21227D16F3006A9933 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A1F227D16F3006A9933 /* Home.storyboard */; };
 		B8D62A23227D16F4006A9933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A22227D16F4006A9933 /* Assets.xcassets */; };
@@ -97,6 +98,7 @@
 		A581F0A2AB4F6C2681BCE9CB /* Pods-Legere-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Legere-iOS/Pods-Legere-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
 		B8B6F39D227E1639002C2EEC /* MoyaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaManager.swift; sourceTree = "<group>"; };
+		B8B6F3A1227E281D002C2EEC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		B8D62A18227D16F3006A9933 /* Legere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Legere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D62A1B227D16F3006A9933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8D62A20227D16F3006A9933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -220,6 +222,24 @@
 				B8B6F39D227E1639002C2EEC /* MoyaManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B8B6F39F227E26D4002C2EEC /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62ACC227DEC97006A9933 /* RegisterViewModel.swift */,
+				B8D62AD0227DED23006A9933 /* RegisterInteractor.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		B8B6F3A0227E26DE002C2EEC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62ACA227DEB3B006A9933 /* LoginViewModel.swift */,
+				B8D62ACE227DED18006A9933 /* LoginInteractor.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		B8D62A0F227D16F3006A9933 = {
@@ -368,6 +388,7 @@
 			children = (
 				B8D62A7A227D1ADD006A9933 /* Base Service.swift */,
 				B8D62A7E227D1F43006A9933 /* Articles.swift */,
+				B8B6F3A1227E281D002C2EEC /* Authentication.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -383,13 +404,11 @@
 		B8D62A88227D531E006A9933 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				B8B6F3A0227E26DE002C2EEC /* Login */,
+				B8B6F39F227E26D4002C2EEC /* Register */,
 				B8D62AD6227E0615006A9933 /* Models */,
 				B8D62A8F227D60BC006A9933 /* Custom Views */,
 				B8D62A8D227D5BC4006A9933 /* AuthenticationViewController.swift */,
-				B8D62ACA227DEB3B006A9933 /* LoginViewModel.swift */,
-				B8D62ACC227DEC97006A9933 /* RegisterViewModel.swift */,
-				B8D62ACE227DED18006A9933 /* LoginInteractor.swift */,
-				B8D62AD0227DED23006A9933 /* RegisterInteractor.swift */,
 				B8D62A89227D537F006A9933 /* Welcome.storyboard */,
 			);
 			path = Welcome;
@@ -802,6 +821,7 @@
 				B8B6F39B227E0BED002C2EEC /* Codable+Helpers.swift in Sources */,
 				B8D62AC5227DE19C006A9933 /* CachingKeys.swift in Sources */,
 				B8D62A96227D61A3006A9933 /* LETextField.swift in Sources */,
+				B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */,
 				B8D62AC4227DE19C006A9933 /* Fields.swift in Sources */,
 				B8D62AB1227DDFBD006A9933 /* NotEmpty.swift in Sources */,
 				B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */,
