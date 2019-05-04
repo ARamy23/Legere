@@ -23,6 +23,8 @@ class HomeViewController: UIViewController, HomeDisplayLogic
 {
     @IBOutlet weak var feedCollectionView: UICollectionView!
     
+    var refresher: UIRefreshControl!
+    
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
@@ -78,6 +80,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         super.viewDidLoad()
         setupNavbar()
         setupCollectionView()
+        setupPullToRefresh()
         getAllArticles()
     }
     
@@ -95,6 +98,18 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         let layout = feedCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
         self.feedCollectionView.register(nibWithCellClass: ArticleCollectionViewCell.self)
+    }
+    
+    private func setupPullToRefresh() {
+        self.refresher = UIRefreshControl()
+        self.feedCollectionView.alwaysBounceVertical = true
+        self.refresher.tintColor = UIColor.black
+        self.refresher.addTarget(self, action: #selector(refreshArticles), for: .valueChanged)
+        self.feedCollectionView.addSubview(refresher)
+    }
+    
+    @objc private func refreshArticles() {
+        getAllArticles()
     }
     
     //@IBOutlet weak var nameTextField: UITextField!
@@ -117,6 +132,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     func displayArticles(viewModel: Home.Feed.ViewModel) {
         self.articles = viewModel.articles
         self.feedCollectionView.reloadData()
+        self.refresher.endRefreshing()
     }
 }
 
