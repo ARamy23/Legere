@@ -1,0 +1,4 @@
+module CNIOOpenSSL {
+    umbrella "/Users/ahmedramy/Desktop/Workstation/Fullstack Projects/Legere/.build/checkouts/swift-nio-ssl.git-2567695184888209966/Sources/CNIOOpenSSL/include"
+    export *
+}
