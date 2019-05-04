@@ -23,6 +23,12 @@ final class AuthenticationViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        animateComponents()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        prepareComponentsForAnimation()
     }
     
     override func initialize() {
@@ -118,5 +124,34 @@ extension AuthenticationViewController {
         attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .jolt)
         
         return attributes
+    }
+}
+
+// MARK: - Animations Logic
+extension AuthenticationViewController {
+    fileprivate func animateComponents() {
+        UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            self.loginRoundView.transform = .identity
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 1.8, delay: 0.2, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.75, options: .curveEaseOut, animations: {
+            self.registerRoundView.transform = .identity
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.375) {
+            self.loginRoundView.alpha = 1
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, animations: {
+            self.registerRoundView.alpha = 1
+        })
+    }
+    
+    fileprivate func prepareComponentsForAnimation() {
+        loginRoundView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        loginRoundView.alpha = 0
+        
+        registerRoundView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        registerRoundView.alpha = 0
     }
 }
