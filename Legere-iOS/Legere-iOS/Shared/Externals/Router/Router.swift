@@ -12,7 +12,7 @@ class Router: RouterProtocol {
     
     var presentedView: BaseViewController!
     
-    func present(view: BaseViewController) {
+    func present(view: UIViewController) {
         presentedView.present(view, animated: true, completion: nil)
     }
     

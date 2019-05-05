@@ -22,7 +22,7 @@ protocol NetworkProtocol {
 
 protocol RouterProtocol {
     var presentedView: BaseViewController! {set get}
-    func present(view: BaseViewController)
+    func present(view: UIViewController)
     func startActivityIndicator()
     func stopActivityIndicator()
     func dismiss()
