@@ -96,6 +96,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.article = articles[indexPath.row]
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ArticleDetailsViewController.instantiate(fromAppStoryboard: .Home)
+        vc.viewModel = self.viewModel
+        vc.articleDetails = ArticleDetails(article: self.articles[indexPath.row])
+        router.present(view: vc)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {

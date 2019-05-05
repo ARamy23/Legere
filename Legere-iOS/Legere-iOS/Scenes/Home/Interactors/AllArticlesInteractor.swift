@@ -10,7 +10,6 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Promises
 
 final class AllArticlesInteractor: BaseInteractor

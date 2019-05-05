@@ -9,6 +9,14 @@ import Foundation
 
 class UserDefaultsManager: CacheProtocol {
     
+    static func getObject<T>(_ object: T.Type, key: CachingKey) -> T? where T : Decodable, T : Encodable {
+        return getData(key: key)?[0].decode(object)
+    }
+    
+    static func getData(key: CachingKey) -> [Data]? {
+        return UserDefaults.standard.data(forKey: key.rawValue).map({[$0]})
+    }
+    
     func getObject<T>(_ object: T.Type, key: CachingKey) -> T? where T : Decodable, T : Encodable {
         return getData(key: key)?[0].decode(object)
     }
