@@ -102,7 +102,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let article = articles[indexPath.row]
         let width: CGFloat = self.view.width - 50
-        let height: CGFloat = article.details?.height(withConstrainedWidth: width, font: .systemFont(ofSize: 17, weight: .light)) ?? 0.0
+        let actualHeight = article.details?.height(withConstrainedWidth: width, font: .systemFont(ofSize: 17, weight: .light)) ?? 0.0
+        let height: CGFloat = (actualHeight <= 300) ? actualHeight : 300
         return CGSize(width: width, height: height + 169 + 40)
     }
 }
