@@ -9,7 +9,7 @@ import Foundation
 
 class UserDefaultsManager: CacheProtocol {
     
-    func getObject<T>(_ object: T, key: CachingKey) -> T? where T : Decodable, T : Encodable {
+    func getObject<T>(_ object: T.Type, key: CachingKey) -> T? where T : Decodable, T : Encodable {
         return getData(key: key)?[0].decode(object)
     }
     

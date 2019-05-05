@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class BaseViewController: UIViewController {
     
     var cache: CacheProtocol = UserDefaultsManager()
     var network: NetworkProtocol = MoyaManager()
     var router: RouterProtocol = Router()
+    
+    let disposeBag = DisposeBag()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

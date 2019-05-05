@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5438FB8AD7B9FA0483646910 /* Pods_Legere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388AF8CAA609B0EFA8A56BB1 /* Pods_Legere_iOS.framework */; };
+		B8390CED227F47BC0056D03F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8390CEC227F47BC0056D03F /* HomeViewModel.swift */; };
 		B8B6F39B227E0BED002C2EEC /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */; };
 		B8B6F39E227E1639002C2EEC /* MoyaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F39D227E1639002C2EEC /* MoyaManager.swift */; };
 		B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A1227E281D002C2EEC /* Authentication.swift */; };
@@ -22,12 +23,8 @@
 		B8D62A6C227D1792006A9933 /* ArticleSearchbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A59227D1792006A9933 /* ArticleSearchbarView.swift */; };
 		B8D62A6D227D1792006A9933 /* ArticleSearchbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A5A227D1792006A9933 /* ArticleSearchbarView.xib */; };
 		B8D62A6E227D1792006A9933 /* ArticleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A5B227D1792006A9933 /* ArticleCollectionViewCell.xib */; };
-		B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A5C227D1792006A9933 /* HomeInteractor.swift */; };
+		B8D62A6F227D1792006A9933 /* AllArticlesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A5C227D1792006A9933 /* AllArticlesInteractor.swift */; };
 		B8D62A70227D1792006A9933 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A5D227D1792006A9933 /* HomeViewController.swift */; };
-		B8D62A71227D1792006A9933 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A5E227D1792006A9933 /* HomeRouter.swift */; };
-		B8D62A72227D1792006A9933 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A5F227D1792006A9933 /* HomeWorker.swift */; };
-		B8D62A73227D1792006A9933 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A60227D1792006A9933 /* HomeModels.swift */; };
-		B8D62A74227D1792006A9933 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A61227D1792006A9933 /* HomePresenter.swift */; };
 		B8D62A75227D1792006A9933 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A65227D1792006A9933 /* Storyboard.swift */; };
 		B8D62A76227D1792006A9933 /* Searchbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A68227D1792006A9933 /* Searchbar.xib */; };
 		B8D62A77227D1792006A9933 /* Searchbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A69227D1792006A9933 /* Searchbar.swift */; };
@@ -97,6 +94,7 @@
 		968E4C71A10C4291082F5FD5 /* Pods-Legere-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-Legere-iOSUITests/Pods-Legere-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		98753E3283AEC68D410F2855 /* Pods_Legere_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Legere_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A581F0A2AB4F6C2681BCE9CB /* Pods-Legere-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Legere-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Legere-iOS/Pods-Legere-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B8390CEC227F47BC0056D03F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B8B6F39A227E0BED002C2EEC /* Codable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
 		B8B6F39D227E1639002C2EEC /* MoyaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaManager.swift; sourceTree = "<group>"; };
 		B8B6F3A1227E281D002C2EEC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
@@ -117,12 +115,8 @@
 		B8D62A59227D1792006A9933 /* ArticleSearchbarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleSearchbarView.swift; sourceTree = "<group>"; };
 		B8D62A5A227D1792006A9933 /* ArticleSearchbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleSearchbarView.xib; sourceTree = "<group>"; };
 		B8D62A5B227D1792006A9933 /* ArticleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCollectionViewCell.xib; sourceTree = "<group>"; };
-		B8D62A5C227D1792006A9933 /* HomeInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		B8D62A5C227D1792006A9933 /* AllArticlesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllArticlesInteractor.swift; sourceTree = "<group>"; };
 		B8D62A5D227D1792006A9933 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		B8D62A5E227D1792006A9933 /* HomeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
-		B8D62A5F227D1792006A9933 /* HomeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
-		B8D62A60227D1792006A9933 /* HomeModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
-		B8D62A61227D1792006A9933 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		B8D62A65227D1792006A9933 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		B8D62A68227D1792006A9933 /* Searchbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Searchbar.xib; sourceTree = "<group>"; };
 		B8D62A69227D1792006A9933 /* Searchbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searchbar.swift; sourceTree = "<group>"; };
@@ -218,6 +212,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B8390CE9227F47370056D03F /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				B8D62A5C227D1792006A9933 /* AllArticlesInteractor.swift */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
 		B8B6F39C227E1626002C2EEC /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,15 +311,12 @@
 		B8D62A56227D1792006A9933 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B8D62A1F227D16F3006A9933 /* Home.storyboard */,
+				B8390CE9227F47370056D03F /* Interactors */,
 				B8D62A82227D3476006A9933 /* Models */,
 				B8D62A57227D1792006A9933 /* Cells */,
-				B8D62A5C227D1792006A9933 /* HomeInteractor.swift */,
 				B8D62A5D227D1792006A9933 /* HomeViewController.swift */,
-				B8D62A5E227D1792006A9933 /* HomeRouter.swift */,
-				B8D62A5F227D1792006A9933 /* HomeWorker.swift */,
-				B8D62A60227D1792006A9933 /* HomeModels.swift */,
-				B8D62A61227D1792006A9933 /* HomePresenter.swift */,
+				B8390CEC227F47BC0056D03F /* HomeViewModel.swift */,
+				B8D62A1F227D16F3006A9933 /* Home.storyboard */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -787,11 +786,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8D62A73227D1792006A9933 /* HomeModels.swift in Sources */,
 				B8D62A7B227D1ADD006A9933 /* Base Service.swift in Sources */,
 				B8D62ACB227DEB3B006A9933 /* LoginViewModel.swift in Sources */,
 				B8D62A70227D1792006A9933 /* HomeViewController.swift in Sources */,
-				B8D62A72227D1792006A9933 /* HomeWorker.swift in Sources */,
 				B8D62AD3227DFD7B006A9933 /* IsValidName.swift in Sources */,
 				B8D62AC0227DE12F006A9933 /* ExternalProtocols.swift in Sources */,
 				B8D62AC7227DE381006A9933 /* BaseViewModel.swift in Sources */,
@@ -800,7 +797,6 @@
 				B8D62AB5227DE088006A9933 /* BaseViewController.swift in Sources */,
 				B8D62AA7227DDF7D006A9933 /* NotFoundError.swift in Sources */,
 				B8D62A87227D4BC1006A9933 /* StringUtils.swift in Sources */,
-				B8D62A71227D1792006A9933 /* HomeRouter.swift in Sources */,
 				B8D62A6C227D1792006A9933 /* ArticleSearchbarView.swift in Sources */,
 				B8B6F39E227E1639002C2EEC /* MoyaManager.swift in Sources */,
 				B8D62AD1227DED23006A9933 /* RegisterInteractor.swift in Sources */,
@@ -811,7 +807,6 @@
 				B8D62A98227D64FB006A9933 /* LoginFormView.swift in Sources */,
 				B8D62A75227D1792006A9933 /* Storyboard.swift in Sources */,
 				B8D62AA5227DDF7D006A9933 /* NotValidPasswordError.swift in Sources */,
-				B8D62A74227D1792006A9933 /* HomePresenter.swift in Sources */,
 				B8D62AB0227DDFBD006A9933 /* IsValidUsername.swift in Sources */,
 				B8D62A78227D1792006A9933 /* BaseCustomView.swift in Sources */,
 				B8D62ABE227DE10A006A9933 /* Router.swift in Sources */,
@@ -819,6 +814,7 @@
 				B8D62AC9227DE3C7006A9933 /* BaseInteractor.swift in Sources */,
 				B8D62AD5227DFE20006A9933 /* NotValidNameError.swift in Sources */,
 				B8D62A6B227D1792006A9933 /* ArticleCollectionViewCell.swift in Sources */,
+				B8390CED227F47BC0056D03F /* HomeViewModel.swift in Sources */,
 				B8D62ACF227DED18006A9933 /* LoginInteractor.swift in Sources */,
 				B8D62AD8227E062D006A9933 /* User.swift in Sources */,
 				B8B6F39B227E0BED002C2EEC /* Codable+Helpers.swift in Sources */,
@@ -828,7 +824,7 @@
 				B8D62AC4227DE19C006A9933 /* Fields.swift in Sources */,
 				B8B6F3A6227E4B43002C2EEC /* Token.swift in Sources */,
 				B8D62AB1227DDFBD006A9933 /* NotEmpty.swift in Sources */,
-				B8D62A6F227D1792006A9933 /* HomeInteractor.swift in Sources */,
+				B8D62A6F227D1792006A9933 /* AllArticlesInteractor.swift in Sources */,
 				B8D62A9E227DD851006A9933 /* RegisterFormView.swift in Sources */,
 				B8D62ACD227DEC97006A9933 /* RegisterViewModel.swift in Sources */,
 				B8D62A8E227D5BC4006A9933 /* AuthenticationViewController.swift in Sources */,

@@ -11,4 +11,5 @@ import Foundation
 enum CachingKey: String {
     case user = "user"
     case token = "token"
+    case articles = "articles"
 }
