@@ -66,7 +66,7 @@ struct ArticlesController: RouteCollection {
             .next(Article.self)
             .map(to: ArticleDetails.self, { (article) in
                 let isLikedByCurrentUser = article.likedBy.first(where: { $0 == userID }) != nil
-                return ArticleDetails(article: article, likes: isLikedByCurrentUser)
+                return ArticleDetails(article: article, isLikedByCurrentUser: isLikedByCurrentUser)
             })
     }
     
@@ -134,24 +134,27 @@ struct ArticlesController: RouteCollection {
         )
     }
     
-    func didReadHandler(_ req: Request) throws -> Future<Article> {
-        return try req.parameters.next(Article.self).flatMap(to: Article.self, { (article) in
-            article.reads += 1
-            return article.save(on: req)
-        })
+    func didReadHandler(_ req: Request) throws -> Future<ArticleDetails> {
+        let userID = try req.requireAuthenticated(User.self).requireID()
+        return try req.parameters.next(Article.self)
+            .flatMap(to: ArticleDetails.self, { (article) in
+                article.reads += 1
+                return article.save(on: req).map(to: ArticleDetails.self, { article in
+                    return ArticleDetails(article: article, isLikedByCurrentUser: article.likedBy.contains(userID))
+                })
+            })
     }
     
-    func didLikeHandler(_ req: Request) throws -> Future<Article> {
-        return try flatMap(to: Article.self,
-                           req.parameters.next(Article.self),
-                           req.content.decode(LikeData.self), { (article, likeData) in
+    func didLikeHandler(_ req: Request) throws -> Future<ArticleDetails> {
+        return try flatMap(to: ArticleDetails.self, req.parameters.next(Article.self), req.content.decode(LikeData.self), { (article, likeData) in
             if let index = article.likedBy.index(where: { $0 == likeData.userID }) {
                 article.likedBy.remove(at: index)
             } else {
                 article.likedBy.append(likeData.userID)
             }
-            
-            return article.save(on: req)
+            return article.save(on: req).map(to: ArticleDetails.self, { article in
+                return ArticleDetails(article: article, isLikedByCurrentUser: article.likedBy.contains(likeData.userID))
+            })
         })
         
     }
@@ -181,7 +184,7 @@ struct ArticleCreateData: Content {
 
 struct ArticleDetails: Content {
     let article: Article
-    let likes: Bool
+    let isLikedByCurrentUser: Bool
 }
 
 struct LikeData: Content {
