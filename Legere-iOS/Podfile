@@ -15,6 +15,7 @@ target 'Legere-iOS' do
     pod 'PromisesSwift'
     pod 'SwiftMessages'
     pod 'Hero'
+    pod 'AlamofireNetworkActivityLogger'
   target 'Legere-iOSTests' do
     inherit! :search_paths
     # Pods for testing

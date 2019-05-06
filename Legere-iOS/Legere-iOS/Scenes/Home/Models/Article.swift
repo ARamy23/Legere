@@ -52,6 +52,6 @@ struct Article: Codable {
 
 extension Article: Equatable {
     static func ==(lhs: Article, rhs: Article) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.reads == rhs.reads && lhs.numberOfLikes == rhs.numberOfLikes
     }
 }

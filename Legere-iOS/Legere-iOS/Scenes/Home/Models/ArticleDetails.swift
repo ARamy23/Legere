@@ -16,3 +16,9 @@ final class ArticleDetails: Codable {
         self.article = article
     }
 }
+
+extension ArticleDetails: Equatable {
+    static func ==(lhs: ArticleDetails, rhs: ArticleDetails) -> Bool {
+        return lhs.article == rhs.article && lhs.isLikedByCurrentUser == rhs.isLikedByCurrentUser
+    }
+}
