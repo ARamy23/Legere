@@ -130,7 +130,7 @@ final class ArticleTests: XCTestCase {
         
         
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
-        XCTAssertTrue(returnedArticle.likes)
+        XCTAssertTrue(returnedArticle.isLikedByCurrentUser)
     }
     
     func testUnlikeOfAnArticleAffectsArticleDetailsForCurrentUser() throws {
@@ -144,14 +144,14 @@ final class ArticleTests: XCTestCase {
         let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
         
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
-        XCTAssertEqual(returnedArticle.likes, true)
+        XCTAssertEqual(returnedArticle.isLikedByCurrentUser, true)
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
         let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
         
         XCTAssertEqual(returnedArticle2.article.numberOfLikes, 0)
-        XCTAssertEqual(returnedArticle2.likes, false)
+        XCTAssertEqual(returnedArticle2.isLikedByCurrentUser, false)
     }
     
     func testDeletingAnArticle() throws {
