@@ -10,6 +10,9 @@ import Moya
 
 enum ArticlesService {
     case allArticles
+    case articleDetails(id: Int)
+    case didRead(articleId: Int)
+    case didLike(articleId: Int)
 }
 
 extension ArticlesService: BaseTargetType {
@@ -17,6 +20,12 @@ extension ArticlesService: BaseTargetType {
         switch self {
         case .allArticles:
             return "/api/articles"
+        case .articleDetails(id: let id):
+            return "/api/articles/\(id)"
+        case .didRead(articleId: let id):
+            return "/api/articles/\(id)/read"
+        case .didLike(articleId: let id):
+            return "/api/articles/\(id)/like"
         }
     }
     
@@ -24,6 +33,12 @@ extension ArticlesService: BaseTargetType {
         switch self {
         case .allArticles:
             return .get
+        case .articleDetails:
+            return .get
+        case .didRead:
+            return .put
+        case .didLike:
+            return .put
         }
     }
     
@@ -34,6 +49,12 @@ extension ArticlesService: BaseTargetType {
     var task: Task {
         switch self {
         case .allArticles:
+            return .requestPlain
+        case .articleDetails:
+            return .requestPlain
+        case .didRead:
+            return .requestPlain
+        case .didLike:
             return .requestPlain
         }
     }

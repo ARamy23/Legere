@@ -13,7 +13,7 @@ enum NotValidPasswordReason {
     case notEqualToConfirmValue
 }
 
-class NotValidPasswordError: Error, LocalizedError {
+final class NotValidPasswordError: Error, LocalizedError {
     
     var reason: NotValidPasswordReason?
     

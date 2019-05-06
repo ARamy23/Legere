@@ -11,80 +11,27 @@
 //
 
 import UIKit
+import Hero
 import SwifterSwift
 
-protocol HomeDisplayLogic: class
-{
-    func displaySomething(viewModel: Home.Something.ViewModel)
-    func displayArticles(viewModel: Home.Feed.ViewModel)
-}
-
-class HomeViewController: UIViewController, HomeDisplayLogic
+final class HomeViewController: BaseViewController
 {
     @IBOutlet weak var feedCollectionView: UICollectionView!
     
-    var refresher: UIRefreshControl!
-    
-    var interactor: HomeBusinessLogic?
-    var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-    
-    // MARK: Datasource
+    var viewModel: HomeViewModel!
     var articles: Articles = []
     
-    // MARK: Object lifecycle
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-    {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    
-    private func setup()
-    {
-        let viewController = self
-        let interactor = HomeInteractor()
-        let presenter = HomePresenter()
-        let router = HomeRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-    
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
-    // MARK: View lifecycle
+    var refresher: UIRefreshControl?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.hero.isEnabled = true
         setupNavbar()
         setupCollectionView()
         setupPullToRefresh()
-        getAllArticles()
     }
-    
-    // MARK: Do something
     
     private func setupNavbar() {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -103,36 +50,31 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     private func setupPullToRefresh() {
         self.refresher = UIRefreshControl()
         self.feedCollectionView.alwaysBounceVertical = true
-        self.refresher.tintColor = UIColor.black
-        self.refresher.addTarget(self, action: #selector(refreshArticles), for: .valueChanged)
-        self.feedCollectionView.addSubview(refresher)
+        self.refresher?.tintColor = UIColor.black
+        self.refresher?.addTarget(self, action: #selector(refreshArticles), for: .valueChanged)
+        self.feedCollectionView.addSubview(refresher!)
+    }
+    
+    override func initialize() {
+        super.initialize()
+        viewModel.getAllArticles()
+    }
+    
+    override func bind() {
+        super.bind()
+        viewModel = HomeViewModel(cache: cache, router: router, network: network)
+        viewModel.articles
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] articles in
+                guard let self = self else { return }
+                self.articles = articles
+                self.feedCollectionView.reloadData()
+                self.refresher?.endRefreshing()
+            }).disposed(by: disposeBag)
     }
     
     @objc private func refreshArticles() {
-        getAllArticles()
-    }
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething()
-    {
-        let request = Home.Something.Request()
-        interactor?.doSomething(request: request)
-    }
-    
-    func getAllArticles() {
-        interactor?.getAllArticles(endpoint: .allArticles)
-    }
-    
-    func displaySomething(viewModel: Home.Something.ViewModel)
-    {
-        //nameTextField.text = viewModel.name
-    }
-    
-    func displayArticles(viewModel: Home.Feed.ViewModel) {
-        self.articles = viewModel.articles
-        self.feedCollectionView.reloadData()
-        self.refresher.endRefreshing()
+        viewModel.getAllArticles()
     }
 }
 
@@ -154,7 +96,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: ArticleCollectionViewCell.self, for: indexPath)
         cell.article = articles[indexPath.row]
+        cell.hero.id = "ironMan"
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ArticleDetailsViewController.instantiate(fromAppStoryboard: .Home)
+        vc.viewModel = self.viewModel
+        vc.articleDetails = ArticleDetails(article: self.articles[indexPath.row])
+        router.present(view: vc)
     }
 }
 
@@ -162,7 +112,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let article = articles[indexPath.row]
         let width: CGFloat = self.view.width - 50
-        let height: CGFloat = article.details?.height(withConstrainedWidth: width, font: .systemFont(ofSize: 17, weight: .light)) ?? 0.0
+        let actualHeight = article.details?.height(withConstrainedWidth: width, font: .systemFont(ofSize: 17, weight: .light)) ?? 0.0
+        let height: CGFloat = (actualHeight <= 300) ? actualHeight : 300
         return CGSize(width: width, height: height + 169 + 40)
     }
 }

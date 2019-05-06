@@ -8,12 +8,4 @@
 
 import UIKit
 
-class ArticleSearchbarView: UICollectionReusableView {
-
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-}
+final class ArticleSearchbarView: UICollectionReusableView { }

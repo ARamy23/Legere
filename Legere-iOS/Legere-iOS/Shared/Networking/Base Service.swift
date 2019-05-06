@@ -17,7 +17,11 @@ extension BaseTargetType {
     }
     
     var headers: [String: String]? {
-        return ["Content-type": "application/json"]
+        var headers: [String: String] = ["Content-type": "application/json"]
+        if let token = UserDefaultsManager.getObject(Token.self, key: .token)?.token {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        return headers
     }
     
     var sampleData: Data {

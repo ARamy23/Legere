@@ -10,7 +10,7 @@ import Foundation
 import Moya
 import Promises
 
-final class MoyaManager: NetworkProtocol {
+class MoyaManager: NetworkProtocol {
     func callModel<T, U>(model: T.Type, api: U) -> Promise<T> where T : Decodable, T : Encodable, U : BaseTargetType {
         return Promise<T> { fullfil, reject in
             let provider = MoyaProvider<U>(plugins: [NetworkLoggerPlugin(verbose: true)])

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterFormView: BaseCustomView {
+final class RegisterFormView: BaseCustomView {
     @IBOutlet weak var usernameTextField: LETextField!
     @IBOutlet weak var nameTextField: LETextField!
     @IBOutlet weak var passwordTextfield: LETextField!

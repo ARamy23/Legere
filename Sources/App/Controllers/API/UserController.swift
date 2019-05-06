@@ -21,16 +21,16 @@ struct UserController: RouteCollection {
         usersRoutes.get(User.parameter, use: getHandler)
         usersRoutes.get(User.parameter, "articles", use: getAllArticlesForUser)
         
-        // Update
-        usersRoutes.put(User.parameter, use: updateHandler)
-        
-        // Update
-        usersRoutes.delete(User.parameter, use: deleteHandler)
-        
         // MARK: Protected Routes
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
         basicAuthGroup.post("login", use: loginHandler)
+        
+        // Update
+        basicAuthGroup.put(User.parameter, use: updateHandler)
+        
+        // Update
+        basicAuthGroup.delete(User.parameter, use: deleteHandler)
     }
     
     // MARK: - Create

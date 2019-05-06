@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EmptyValueError: Error, LocalizedError {
+final class EmptyValueError: Error, LocalizedError {
     var key: String
     
     init(key: String) {

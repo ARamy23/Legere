@@ -22,9 +22,7 @@ final class LoginViewModel: BaseViewModel {
                 guard let tabBar = AppStoryboard.Home.initialViewController() as? UITabBarController else { fatalError() }
                 self.router.present(view: tabBar)
             })
-            }.catch { (error) in
-                self.router.toastError(title: "Error", message: error.localizedDescription)
-        }
+            }.catch(handleError)
     }
 }
 

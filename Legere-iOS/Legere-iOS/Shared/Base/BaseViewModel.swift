@@ -19,4 +19,8 @@ class BaseViewModel {
         self.router = router
         self.baseInteractor = BaseInteractor(network: network, cache: cache)
     }
+    
+    func handleError(error: Error) {
+        router.toastError(title: "Error", message: error.localizedDescription)
+    }
 }

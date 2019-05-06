@@ -49,3 +49,9 @@ struct Article: Codable {
         self.numberOfLikes = likedBy.count
     }
 }
+
+extension Article: Equatable {
+    static func ==(lhs: Article, rhs: Article) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

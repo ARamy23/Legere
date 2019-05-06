@@ -11,7 +11,7 @@ import Promises
 protocol CacheProtocol {
     func getData(key: CachingKey) -> [Data]?
     func saveData(_ data: Data?, key: CachingKey)
-    func getObject<T: Codable>(_ object: T, key: CachingKey) -> T?
+    func getObject<T: Codable>(_ object: T.Type, key: CachingKey) -> T?
     func saveObject<T: Codable>(_ object: T, key: CachingKey)
     func removeObject(key: CachingKey)
 }

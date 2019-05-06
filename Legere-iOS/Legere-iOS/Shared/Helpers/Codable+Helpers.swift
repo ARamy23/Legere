@@ -19,7 +19,7 @@ extension Encodable {
 }
 
 extension Data {
-    func decode<T: Codable>(_ object: T) -> T? {
+    func decode<T: Codable>(_ object: T.Type) -> T? {
         return (try? JSONDecoder().decode(T.self, from: self))
     }
 }
