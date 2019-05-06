@@ -18,3 +18,10 @@
         <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4.1">
     </a>
 </p>
+
+
+To run the server on a localhost, run the two following commands
+
+`brew tap vapor/tap`
+
+`brew install vapor/tap/vapor`
