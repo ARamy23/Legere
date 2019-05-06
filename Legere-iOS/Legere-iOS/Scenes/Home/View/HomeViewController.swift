@@ -13,7 +13,7 @@
 import UIKit
 import SwifterSwift
 
-class HomeViewController: BaseViewController
+final class HomeViewController: BaseViewController
 {
     @IBOutlet weak var feedCollectionView: UICollectionView!
     

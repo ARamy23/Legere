@@ -1,14 +1,14 @@
 //
-//  ArticleDetailsInteractor.swift
+//  DidLikeArticleInteractor.swift
 //  Legere-iOS
 //
-//  Created by Ahmed Ramy on 5/5/19.
+//  Created by Ahmed Ramy on 5/6/19.
 //  Copyright © 2019 Ahmed Ramy. All rights reserved.
 //
 
 import Promises
 
-final class ArticleDetailsInteractor: BaseInteractor {
+final class DidLikeArticleInteractor: BaseInteractor {
     let articleId: Int
     init(articleId: Int, base: BaseInteractor){
         self.articleId = articleId
@@ -16,6 +16,6 @@ final class ArticleDetailsInteractor: BaseInteractor {
     }
     
     override func process<T>(_ model: T.Type) -> Promise<T> where T : Decodable, T : Encodable {
-        return network.callModel(model: model, api: ArticlesService.didLike(articleId: articleId))
+        return network.callModel(model: model, api: ArticlesService.articleDetails(id: articleId))
     }
 }

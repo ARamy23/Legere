@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginFormView: BaseCustomView {
+final class LoginFormView: BaseCustomView {
     @IBOutlet weak var usernameTextField: LETextField!
     @IBOutlet weak var passwordTextfield: LETextField!
     

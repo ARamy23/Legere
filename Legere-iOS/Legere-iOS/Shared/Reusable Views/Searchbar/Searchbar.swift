@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Searchbar: BaseCustomView {
+final class Searchbar: BaseCustomView {
     @IBOutlet weak var searchTextField: UITextField!
     
     init() {

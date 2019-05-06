@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LETextField: BaseCustomView {
+final class LETextField: BaseCustomView {
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var showHideEntryButton: UIButton!

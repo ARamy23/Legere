@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticleDetailsViewController: BaseViewController {
+final class ArticleDetailsViewController: BaseViewController {
     
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var articleBodyTextView: UITextView!
@@ -35,6 +35,11 @@ class ArticleDetailsViewController: BaseViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        didRead(articleId: articleDetails.article?.id ?? 0)
+    }
+    
     override func initialize() {
         super.initialize()
         peopleBarRoundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -58,6 +63,10 @@ class ArticleDetailsViewController: BaseViewController {
     }
     
     @IBAction func loveButtonTapped(_ sender: Any) {
-        
+        viewModel.didLike(articleDetails.article?.id ?? 0)
+    }
+    
+    fileprivate func didRead(articleId: Int) {
+        viewModel.didRead(articleDetails.article?.id ?? 0)
     }
 }

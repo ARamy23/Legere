@@ -17,6 +17,7 @@
 		B8B6F3A2227E281D002C2EEC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A1227E281D002C2EEC /* Authentication.swift */; };
 		B8B6F3A6227E4B43002C2EEC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B6F3A5227E4B43002C2EEC /* Token.swift */; };
 		B8D0143D227FAB03009019F1 /* DidReadArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D0143C227FAB03009019F1 /* DidReadArticleInteractor.swift */; };
+		B8D01445227FB561009019F1 /* DidLikeArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D01444227FB561009019F1 /* DidLikeArticleInteractor.swift */; };
 		B8D62A1C227D16F3006A9933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D62A1B227D16F3006A9933 /* AppDelegate.swift */; };
 		B8D62A21227D16F3006A9933 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A1F227D16F3006A9933 /* Home.storyboard */; };
 		B8D62A23227D16F4006A9933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D62A22227D16F4006A9933 /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		B8B6F3A1227E281D002C2EEC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		B8B6F3A5227E4B43002C2EEC /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		B8D0143C227FAB03009019F1 /* DidReadArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidReadArticleInteractor.swift; sourceTree = "<group>"; };
+		B8D01444227FB561009019F1 /* DidLikeArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidLikeArticleInteractor.swift; sourceTree = "<group>"; };
 		B8D62A18227D16F3006A9933 /* Legere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Legere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D62A1B227D16F3006A9933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8D62A20227D16F3006A9933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				B8D62A5C227D1792006A9933 /* AllArticlesInteractor.swift */,
 				B8390CF3227F7C700056D03F /* ArticleDetailsInteractor.swift */,
 				B8D0143C227FAB03009019F1 /* DidReadArticleInteractor.swift */,
+				B8D01444227FB561009019F1 /* DidLikeArticleInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				B8D62AC9227DE3C7006A9933 /* BaseInteractor.swift in Sources */,
 				B8390CF0227F593A0056D03F /* ArticleDetailsViewController.swift in Sources */,
 				B8D62AD5227DFE20006A9933 /* NotValidNameError.swift in Sources */,
+				B8D01445227FB561009019F1 /* DidLikeArticleInteractor.swift in Sources */,
 				B8D62A6B227D1792006A9933 /* ArticleCollectionViewCell.swift in Sources */,
 				B8390CED227F47BC0056D03F /* HomeViewModel.swift in Sources */,
 				B8D62ACF227DED18006A9933 /* LoginInteractor.swift in Sources */,

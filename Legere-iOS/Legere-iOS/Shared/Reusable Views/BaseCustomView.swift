@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCustomView: UIView {
+final class BaseCustomView: UIView {
     var viewFromNib: UIView!
     
     override init(frame: CGRect) {

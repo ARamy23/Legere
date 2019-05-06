@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotFoundError: Error, LocalizedError {
+final class NotFoundError: Error, LocalizedError {
     
     var key: String
     
