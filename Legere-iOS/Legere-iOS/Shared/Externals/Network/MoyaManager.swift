@@ -11,13 +11,18 @@ import Moya
 import Promises
 
 class MoyaManager: NetworkProtocol {
+    static var ongoingRequests = [Cancellable]()
+    
     func callModel<T, U>(model: T.Type, api: U) -> Promise<T> where T : Decodable, T : Encodable, U : BaseTargetType {
         return Promise<T> { fullfil, reject in
-            let provider = MoyaProvider<U>(plugins: [NetworkLoggerPlugin(verbose: true)])
+            let provider = MoyaProvider<U>()
             provider.request(api) { (result) in
                 switch result {
                 case .success(let response):
                     do {
+                        if let error = try? response.map(NetworkError.self), error.error == true {
+                            reject(error)
+                        }
                         let model = try response.map(T.self)
                         fullfil(model)
                     } catch let error {
@@ -28,5 +33,14 @@ class MoyaManager: NetworkProtocol {
                 }
             }
         }
+    }
+}
+
+struct NetworkError: Error, LocalizedError, Codable {
+    let error: Bool?
+    let reason: String?
+    
+    var errorDescription: String? {
+        return reason ?? "Something went wrong."
     }
 }

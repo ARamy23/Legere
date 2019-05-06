@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 import Promises
 
 protocol CacheProtocol {

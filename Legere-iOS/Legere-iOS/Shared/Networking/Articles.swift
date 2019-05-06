@@ -55,7 +55,8 @@ extension ArticlesService: BaseTargetType {
         case .didRead:
             return .requestPlain
         case .didLike:
-            return .requestPlain
+            guard let userID = UserDefaultsManager.getObject(User.self, key: .user)?.id else { fatalError() }
+            return .requestParameters(parameters: ["userID": userID.uuidString], encoding: JSONEncoding.default)
         }
     }
 }

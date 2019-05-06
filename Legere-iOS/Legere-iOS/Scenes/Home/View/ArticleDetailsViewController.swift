@@ -30,6 +30,10 @@ final class ArticleDetailsViewController: BaseViewController {
         self.configureViewFromModel()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func initialize() {
         super.initialize()
         peopleBarRoundView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -38,6 +42,9 @@ final class ArticleDetailsViewController: BaseViewController {
             let (index, view) = arg
             view.layer.zPosition = 3 - CGFloat(index)
         }
+        
+        guard let articleId = articleDetails.article?.id else { return }
+        didRead(articleId: articleId)
     }
     
     func setupHero() {
@@ -58,11 +65,16 @@ final class ArticleDetailsViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.getArticleDetails(articleDetails.article!)
-        viewModel.articleDetails.subscribe(onNext: { [weak self] articleDetails in
-            guard let self = self else { return }
-            self.articleDetails = articleDetails
-        }).disposed(by: disposeBag)
+        if let articleId = articleDetails.article?.id {
+            viewModel.getArticleDetails(articleId)
+        }
+        viewModel.articleDetails
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] articleDetails in
+                guard let self = self, articleDetails.article != nil else { return }
+                self.articleDetails = articleDetails
+                self.configureViewFromModel()
+            }).disposed(by: disposeBag)
     }
     
     @IBAction func dismissButtonTapped(_ sender: Any) {
@@ -70,10 +82,11 @@ final class ArticleDetailsViewController: BaseViewController {
     }
     
     @IBAction func loveButtonTapped(_ sender: Any) {
-        viewModel.didLike(articleDetails.article?.id ?? 0)
+        guard let articleId = articleDetails.article?.id else { return }
+        viewModel.didLike(articleId)
     }
     
     fileprivate func didRead(articleId: Int) {
-//        viewModel.didRead(articleId)
+        viewModel.didRead(articleId)
     }
 }

@@ -28,9 +28,8 @@ final class HomeViewModel: BaseViewModel {
             }.catch(handleError)
     }
     
-    func getArticleDetails(_ article: Article) {
-        articleDetails.onNext(ArticleDetails(article: article))
-        ArticleDetailsInteractor(articleId: article.id ?? 0, base: baseInteractor)
+    func getArticleDetails(_ articleId: Int) {
+        ArticleDetailsInteractor(articleId: articleId, base: baseInteractor)
             .execute(ArticleDetails.self)
             .then { [weak self] articleDetails in
             guard let self = self else { return }
