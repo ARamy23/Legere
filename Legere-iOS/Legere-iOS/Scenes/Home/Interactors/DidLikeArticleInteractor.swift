@@ -16,6 +16,6 @@ final class DidLikeArticleInteractor: BaseInteractor {
     }
     
     override func process<T>(_ model: T.Type) -> Promise<T> where T : Decodable, T : Encodable {
-        return network.callModel(model: model, api: ArticlesService.articleDetails(id: articleId))
+        return network.callModel(model: model, api: ArticlesService.didLike(articleId: articleId))
     }
 }

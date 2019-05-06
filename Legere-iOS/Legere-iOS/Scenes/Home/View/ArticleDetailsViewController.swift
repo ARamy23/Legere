@@ -22,22 +22,12 @@ final class ArticleDetailsViewController: BaseViewController {
     @IBOutlet weak var isLovedImageView: UIImageView!
     
     var viewModel: HomeViewModel!
-    var articleDetails: ArticleDetails! {
-        didSet {
-            articleTitleLabel?.text = articleDetails.article?.title
-            articleBodyTextView?.text = articleDetails.article?.details
-            isLovedImageView?.image = (articleDetails.isLikedByCurrentUser == true) ? #imageLiteral(resourceName: "ic_love") : #imageLiteral(resourceName: "ic_love_unselected")
-            let numberOfLikes = articleDetails.article?.numberOfLikes ?? 0
-            peopleLikedThisLabel?.text = "\(numberOfLikes) People Liked This"
-            
-            peopleBarView?.isHidden = numberOfLikes < 1
-            includingYouView?.isHidden = articleDetails.isLikedByCurrentUser != true
-        }
-    }
+    var articleDetails: ArticleDetails!
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        didRead(articleId: articleDetails.article?.id ?? 0)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupHero()
+        self.configureViewFromModel()
     }
     
     override func initialize() {
@@ -48,6 +38,23 @@ final class ArticleDetailsViewController: BaseViewController {
             let (index, view) = arg
             view.layer.zPosition = 3 - CGFloat(index)
         }
+    }
+    
+    func setupHero() {
+        self.hero.isEnabled = true
+        self.view.hero.id = "ironMan"
+    }
+    
+    func configureViewFromModel() {
+        guard let article = articleDetails.article else { return }
+        articleTitleLabel?.text = article.title
+        articleBodyTextView?.text = article.details
+        isLovedImageView?.image = (articleDetails.isLikedByCurrentUser == true) ? #imageLiteral(resourceName: "ic_love") : #imageLiteral(resourceName: "ic_love_unselected")
+        let numberOfLikes = article.numberOfLikes
+        peopleLikedThisLabel?.text = "\(numberOfLikes) People Liked This"
+        
+        peopleBarView?.isHidden = numberOfLikes < 1
+        includingYouView?.isHidden = articleDetails.isLikedByCurrentUser != true
     }
     
     override func bind() {
@@ -67,6 +74,6 @@ final class ArticleDetailsViewController: BaseViewController {
     }
     
     fileprivate func didRead(articleId: Int) {
-        viewModel.didRead(articleDetails.article?.id ?? 0)
+//        viewModel.didRead(articleId)
     }
 }

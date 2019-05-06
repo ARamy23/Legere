@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Hero
 import SwifterSwift
 
 final class HomeViewController: BaseViewController
@@ -26,6 +27,7 @@ final class HomeViewController: BaseViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.hero.isEnabled = true
         setupNavbar()
         setupCollectionView()
         setupPullToRefresh()
@@ -94,6 +96,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: ArticleCollectionViewCell.self, for: indexPath)
         cell.article = articles[indexPath.row]
+        cell.hero.id = "ironMan"
         return cell
     }
     
