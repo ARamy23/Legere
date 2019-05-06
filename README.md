@@ -25,3 +25,6 @@ To run the server on a localhost, run the two following commands
 `brew tap vapor/tap`
 
 `brew install vapor/tap/vapor`
+
+also Postman collection can be found here 
+https://www.getpostman.com/collections/8a0feee464f331aa72bc
