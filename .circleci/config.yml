@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: "8.3.3"
+    version: "10.1"
 
 dependencies:
   pre:
@@ -20,3 +20,12 @@ test:
       swift test 2>&1 |
       tee $CIRCLE_ARTIFACTS/test.log |
       xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/results.xml
+
+workflows:
+  version: 2
+  main:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: develop
