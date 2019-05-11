@@ -14,7 +14,7 @@ script:
   # run unit tests
   - swift build --configuration release
   - swift package generate-xcodeproj
-  - xcodebuild -scheme Legere-Packages -enableCodeCoverage YES test | xcpretty  # instead of swift test
+  - xcodebuild -scheme Legere-Package -enableCodeCoverage YES test | xcpretty  # instead of swift test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
