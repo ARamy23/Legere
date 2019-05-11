@@ -7,4 +7,4 @@ script:
 - swift package generate-xcodeproj
 - set -o pipefail && xcodebuild -scheme Legere-Package -enableCodeCoverage YES clean build test | xcpretty
 after_success:
-- bash <(curl -s https://codecov.io/bash) -J 'TaskerServerLib'
+- bash <(curl -s https://codecov.io/bash) -J 'Tests/AppTests'
