@@ -1,32 +1,10 @@
-os:
-    - linux
-    - osx
-language: generic
-sudo: required
-dist: trusty
-
-osx_image: xcode9.1
-before_install:
-    - if [ $TRAVIS_OS_NAME == "osx" ]; then
-            brew update;
-            brew tap vapor/tap;
-            brew update;
-            brew install vapor;
-        else
-            eval "$(curl -sL https://apt.vapor.sh)";
-            sudo apt-get install vapor;
-            sudo chmod -R a+rx /usr/;
-        fi
-
+language: swift
+os: osx
+osx_image: xcode9.2
+before_script:
+- gem install xcpretty
 script:
-    - swift build
-    - swift build -c release
-    - swift test
-
+- swift package generate-xcodeproj
+- set -o pipefail && xcodebuild -scheme Legere-Package -enableCodeCoverage YES clean build test | xcpretty
 after_success:
-    - eval "$(curl -sL https://raw.githubusercontent.com/vapor-community/swift/swift-4-codecov/codecov-swift4)"
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+- bash <(curl -s https://codecov.io/bash) -J 'TaskerServerLib'
