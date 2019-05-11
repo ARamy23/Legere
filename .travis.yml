@@ -1,10 +1,20 @@
-language: swift
-os: osx
-osx_image: xcode9.2
-before_script:
-- gem install xcpretty
+language: generic
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8.3
+
+before_install:
+  - gem install xcpretty
+  - brew tap vapor/tap
+  - brew update
+  - brew install vapor
+
 script:
-- swift package generate-xcodeproj
-- set -o pipefail && xcodebuild -scheme Legere-Package -enableCodeCoverage YES clean build test | xcpretty
+  # run unit tests
+  - swift build --configuration release
+  - swift package generate-xcodeproj
+  - xcodebuild -scheme Legere-Packages -enableCodeCoverage YES test | xcpretty  # instead of swift test
+
 after_success:
-- bash <(curl -s https://codecov.io/bash) -J 'Tests/AppTests'
+  - bash <(curl -s https://codecov.io/bash)
