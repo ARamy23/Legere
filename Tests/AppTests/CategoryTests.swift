@@ -55,4 +55,9 @@ final class CategoryTests: XCTestCase {
         XCTAssertEqual(categories[0].name, category.name)
         XCTAssertEqual(categories[0].id, category.id)
     }
+    
+    static let allTests = [
+        ("testCategoriesCanBeSavedFromAPI", testCategoriesCanBeSavedFromAPI),
+        ("testCategoriesCanBeRetrievedFromAPI", testCategoriesCanBeRetrievedFromAPI)
+    ]
 }

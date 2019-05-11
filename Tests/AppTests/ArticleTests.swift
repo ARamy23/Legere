@@ -231,4 +231,20 @@ final class ArticleTests: XCTestCase {
 //        XCTAssert(articles[0].details.contains(article1.details), "not close")
 //        XCTAssert(articles[1].details.contains(article2.details), "not close")
     }
+    
+    static let allTests = [
+        ("testArticlesCanBeSavedFromAPI", testArticlesCanBeSavedFromAPI),
+        ("testArticlesCanBeRetrievedFromAPI", testArticlesCanBeRetrievedFromAPI),
+        ("testUpdatingAnArticle", testUpdatingAnArticle),
+        ("testUpdatingReadsOfAnArticle", testUpdatingReadsOfAnArticle),
+        ("testLikeOfAnArticleAffectsLikesCount", testLikeOfAnArticleAffectsLikesCount),
+        ("testUnlikeOfAnArticleAffectsLikesCount", testUnlikeOfAnArticleAffectsLikesCount),
+        ("testLikeOfAnArticleAffectsArticleDetailsForCurrentUser", testLikeOfAnArticleAffectsArticleDetailsForCurrentUser),
+        ("testUnlikeOfAnArticleAffectsArticleDetailsForCurrentUser", testUnlikeOfAnArticleAffectsArticleDetailsForCurrentUser),
+        ("testDeletingAnArticle", testDeletingAnArticle),
+        ("testGettingAnArticlesUser", testGettingAnArticlesUser),
+        ("testArticlesCategories", testArticlesCategories),
+        ("testSearchArticle", testSearchArticle),
+        ("testSearchArticleByCategory", testSearchArticleByCategory)
+    ]
 }
