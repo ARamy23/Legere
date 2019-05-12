@@ -61,15 +61,19 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
 private func configurePostgreDatabase(_ env: Environment) -> PostgreSQLDatabase {
     let databaseName: String
     let databasePort: Int
-    let hostName = "localhost"
-    let dbUsername = "aramy"
-    let password = "password"
+    let hostName = Environment.get("DATABASE_HOSTNAME") ?? "localhost"
+    let dbUsername = Environment.get("DATABASE_USER") ?? "aramy"
+    let password = Environment.get("DATABASE_PASSWORD") ?? "password"
     
     if env == .testing {
         databaseName = "legere-testing"
-        databasePort = 5433
+        if let testPort = Environment.get("DATABASE_PORT") {
+            databasePort = Int(testPort) ?? 5433
+        } else {
+            databasePort = 5433
+        }
     } else {
-        databaseName = "legere-staging"
+        databaseName = Environment.get("DATABASE_DB") ?? "legere-staging"
         databasePort = 5432
     }
     

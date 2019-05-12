@@ -1,0 +1,24 @@
+# 1
+version: '3'
+# 2
+services:
+  # 3
+  legere:
+    # 4
+    depends_on:
+      - postgres
+    # 5
+    build: .
+    # 6
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+  # 7
+  postgres:
+    # 8
+    image: "postgres"
+    # 9
+    environment:
+      - POSTGRES_DB=legere-testing
+      - POSTGRES_USER=aramy
+      - POSTGRES_PASSWORD=password 
