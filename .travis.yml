@@ -1,24 +1,32 @@
+os:
+    - linux
+    - osx
 language: generic
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode10.1
+sudo: required
+dist: trusty
 
+osx_image: xcode9.2
 before_install:
-  - brew tap vapor/tap
-  - brew update
-  - brew install vapor
+    - if [ $TRAVIS_OS_NAME == "osx" ]; then
+            brew update;
+            brew tap vapor/tap;
+            brew update;
+            brew install vapor;
+        else
+            eval "$(curl -sL https://apt.vapor.sh)";
+            sudo apt-get install vapor;
+            sudo chmod -R a+rx /usr/;
+        fi
 
-services:
-  - docker
-
-env:
-  - COMPOSE_FILE=docker-compose.yml:docker-compose.override.travis.yml
-  
 script:
-  # run unit tests
-  - docker-compose build
-  - docker-compose up --abort-on-container-exit
+    - swift build
+    - swift build -c release
+    - swift test
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    - eval "$(curl -sL https://raw.githubusercontent.com/vapor-community/swift/swift-4-codecov/codecov-swift4)"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
