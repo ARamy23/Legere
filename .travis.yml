@@ -5,16 +5,14 @@ matrix:
       osx_image: xcode10.1
 
 before_install:
-  - gem install xcpretty
   - brew tap vapor/tap
   - brew update
   - brew install vapor
 
 script:
   # run unit tests
-  - swift build --configuration release
-  - swift package generate-xcodeproj
-  - xcodebuild -scheme Legere-Package -enableCodeCoverage YES test | xcpretty  # instead of swift test
+  - docker-compose build
+  - docker-compose up --abort-on-container-exit
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
