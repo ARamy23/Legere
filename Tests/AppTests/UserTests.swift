@@ -82,6 +82,15 @@ final class UserTests: XCTestCase {
         XCTAssertEqual(articles[0].details, articleDetails)
     }
     
+    func testAddingProfilePicture() throws {
+        let user = try User.create(on: conn)
+        let profilePicture = ProfilePictureUploadData(profilePicture: "heakfonasjnfiabscijansdcij")
+        let recievedUser = try app.getResponse(to: "\(usersURI)/\(user.id!)/profilePicture",
+            method: .PUT, headers: ["Content-Type": "application/json"], data: profilePicture, decodeTo: User.Public.self, loggedInRequest: true, loggedInUser: user)
+        
+        XCTAssertEqual(recievedUser.profilePicture!, profilePicture.profilePicture)
+    }
+    
     static let allTests = [
         ("testUsersCanBeRetrievedFromAPI", testUsersCanBeRetrievedFromAPI),
         ("testUserCanBeSavedWithAPI", testUserCanBeSavedWithAPI),

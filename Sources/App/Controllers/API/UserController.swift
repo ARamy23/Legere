@@ -28,6 +28,7 @@ struct UserController: RouteCollection {
         
         // Update
         basicAuthGroup.put(User.parameter, use: updateHandler)
+        basicAuthGroup.put(User.parameter, "profilePicture", use: addProfilePictureHandler)
         
         // Update
         basicAuthGroup.delete(User.parameter, use: deleteHandler)
@@ -75,6 +76,15 @@ struct UserController: RouteCollection {
         }
     }
     
+    func addProfilePictureHandler(_ req: Request) throws -> Future<User.Public> {
+        return try flatMap(to: User.Public.self,
+           req.parameters.next(User.self),
+           req.content.decode(ProfilePictureUploadData.self)) { (user, imageString) in
+                user.profilePicture = imageString.profilePicture
+            return user.save(on: req).convertToPublic()
+        }
+    }
+    
     // MARK: - Delete
     func deleteHandler(_ req: Request) throws -> Future<HTTPStatus> {
         return try req
@@ -83,4 +93,8 @@ struct UserController: RouteCollection {
             .delete(on: req)
             .transform(to: .noContent)
     }
+}
+
+struct ProfilePictureUploadData: Content {
+    let profilePicture: String
 }
