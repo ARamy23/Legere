@@ -16,22 +16,26 @@ final class User: Codable {
     var name: String
     var username: String
     var password: String
+    var profilePicture: String?
     
-    init(name: String, username: String, password: String) {
+    init(name: String, username: String, password: String, profilePicture: String? = nil) {
         self.name = name
         self.username = username
         self.password = password
+        self.profilePicture = profilePicture
     }
     
     final class Public: Codable {
         var id: UUID?
         var name: String
         var username: String
+        var profilePicture: String?
         
-        init(id: UUID?, name: String, username: String) {
+        init(id: UUID?, name: String, username: String, profilePicture: String? = nil) {
             self.id = id
             self.name = name
             self.username = username
+            self.profilePicture = profilePicture
         }
     }
 }
@@ -47,7 +51,7 @@ extension User.Public: Content {}
 
 extension User {
     func convertToPublic() -> User.Public {
-        return User.Public(id: id, name: name, username: username)
+        return User.Public(id: id, name: name, username: username, profilePicture: profilePicture)
     }
 }
 

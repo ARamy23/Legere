@@ -1,4 +1,4 @@
 module CCryptoOpenSSL {
-    umbrella "/Users/ahmedramy/Desktop/Workstation/Fullstack Projects/Legere/.build/checkouts/crypto.git--3884239120854632538/Sources/CCryptoOpenSSL/include"
+    umbrella "/Users/ahmedramy/Desktop/Workstation/Fullstack Projects/Legere/Legere-Backend/.build/checkouts/crypto.git--3884239120854632538/Sources/CCryptoOpenSSL/include"
     export *
 }

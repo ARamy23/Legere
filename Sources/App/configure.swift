@@ -22,8 +22,10 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     // For example, a Middleware for determining a web request from a mobile request
     // Another one would be to handle Stripe Requests (something like Payfort but better)
     
+    services.register(LogMiddleware.self)
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     // middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
+    middlewares.use(LogMiddleware.self)
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
     
