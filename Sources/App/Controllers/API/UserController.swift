@@ -24,14 +24,23 @@ struct UserController: RouteCollection {
         // MARK: Protected Routes
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
+        
+        // Create
         basicAuthGroup.post("login", use: loginHandler)
         
-        // Update
-        basicAuthGroup.put(User.parameter, use: updateHandler)
-        basicAuthGroup.put(User.parameter, "profilePicture", use: addProfilePictureHandler)
+        let tokenAuthMiddleware = User.tokenAuthMiddleware()
+        let guardAuthMidlleware = User.guardAuthMiddleware()
+        let protectedRoutes = usersRoutes.grouped([tokenAuthMiddleware, guardAuthMidlleware])
+        
+        // Read
+        protectedRoutes.get("profile", use: getProfile)
         
         // Update
-        basicAuthGroup.delete(User.parameter, use: deleteHandler)
+        protectedRoutes.put(User.parameter, use: updateHandler)
+        protectedRoutes.put(User.parameter, "profilePicture", use: addProfilePictureHandler)
+        
+        // Update
+        protectedRoutes.delete(User.parameter, use: deleteHandler)
     }
     
     // MARK: - Create
