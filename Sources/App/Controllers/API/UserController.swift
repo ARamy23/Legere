@@ -66,6 +66,18 @@ struct UserController: RouteCollection {
         })
     }
     
+    func getAuthoredArticles(_ req: Request) throws -> Future<[Article]> {
+        return try req.requireAuthenticated(User.self).save(on: req).flatMap(to: [Article].self) { user in
+            return try user.articles.query(on: req).all()
+        }
+    }
+    
+    func getLikedArticles(_ req: Request) throws -> Future<[Article]> {
+        return try req.requireAuthenticated(User.self).save(on: req).flatMap(to: [Article].self) { user in
+            return try user.likes.query(on: req).all()
+        }
+    }
+    
     func getProfile(_ req: Request) throws -> Future<User.Public> {
         return try req.requireAuthenticated(User.self).save(on: req).convertToPublic()
     }
