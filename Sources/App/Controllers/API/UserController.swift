@@ -34,6 +34,8 @@ struct UserController: RouteCollection {
         
         // Read
         protectedRoutes.get("profile", use: getProfile)
+        protectedRoutes.get("profile/likes", use: getLikedArticles)
+        protectedRoutes.get("profile/authored", use: getAuthoredArticles)
         
         // Update
         protectedRoutes.put(User.parameter, use: updateHandler)

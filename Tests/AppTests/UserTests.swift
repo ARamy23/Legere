@@ -91,6 +91,31 @@ final class UserTests: XCTestCase {
         XCTAssertEqual(recievedUser.profilePicture!, profilePicture.profilePicture)
     }
     
+    func testFetchingLikedArticles() throws {
+        // Given
+        let user = try User.create(on: conn)
+        let article = try Article.create(on: conn)
+        // When
+        _ = try app.getResponse(to: "api/articles/\(article.id!)/like", method: .PUT, headers: ["Content-Type": "application/json"], decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: user)
+        
+        // Then
+        let likedArticles = try app.getResponse(to: "\(usersURI)profile/likes", method: .GET, headers: ["Content-Type": "application/json"], decodeTo: [Article].self, loggedInRequest: true, loggedInUser: user)
+        
+        XCTAssert(likedArticles.count > 0)
+    }
+    
+    func testFetchingAuthoredArticles() throws {
+        // Given
+        let user = try User.create(on: conn)
+        _ = try Article.create(title: "hello", details: "hello", user: user, on: conn)
+        
+        // When
+        let authoredArticles = try app.getResponse(to: "\(usersURI)/profile/authored", method: .GET, headers: ["Content-Type": "application/json"], decodeTo: [Article].self, loggedInRequest: true, loggedInUser: user)
+        
+        // Then
+        XCTAssert(authoredArticles.count > 0)
+    }
+    
     static let allTests = [
         ("testUsersCanBeRetrievedFromAPI", testUsersCanBeRetrievedFromAPI),
         ("testUserCanBeSavedWithAPI", testUserCanBeSavedWithAPI),
