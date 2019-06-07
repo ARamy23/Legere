@@ -64,11 +64,15 @@ extension Article: Migration {
     }
 }
 
+// MARK: - Author Relation
 extension Article {
     var author: Parent<Article, User> {
         return parent(\.userID)
     }
-    
+}
+
+// MARK: - Categories Relation
+extension Article {
     var categories: Siblings<Article, Category, ArticleCategoryPivot> {
         return siblings()
     }
