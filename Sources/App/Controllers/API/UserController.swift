@@ -66,6 +66,10 @@ struct UserController: RouteCollection {
         })
     }
     
+    func getProfile(_ req: Request) throws -> Future<User.Public> {
+        return try req.requireAuthenticated(User.self).save(on: req).convertToPublic()
+    }
+    
     func loginHandler(_ req: Request) throws -> Future<Token> {
         let user = try req.requireAuthenticated(User.self)
         let token = try Token.generate(for: user)
