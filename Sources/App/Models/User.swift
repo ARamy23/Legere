@@ -87,6 +87,12 @@ extension User: TokenAuthenticatable {
     typealias TokenType = Token
 }
 
+extension User {
+    var likes: Siblings<User, Article, LikesPivot> {
+        return siblings()
+    }
+}
+
 struct AdminUser: Migration {
     typealias Database = PostgreSQLDatabase
     

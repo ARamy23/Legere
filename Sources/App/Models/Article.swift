@@ -77,3 +77,10 @@ extension Article {
         return siblings()
     }
 }
+
+// MARK: - Likes Relation
+extension Article {
+    var likers: Siblings<Article, User, LikesPivot> {
+        return siblings()
+    }
+}
