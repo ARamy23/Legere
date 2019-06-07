@@ -29,7 +29,8 @@ struct ArticlesController: RouteCollection {
         // Update
         protectedRoutes.put(Article.parameter, use: updateHandler)
         protectedRoutes.put(Article.parameter, "read", use: didReadHandler)
-        protectedRoutes.put(Article.parameter, "like", use: didLikeHandler)
+        protectedRoutes.put(Article.parameter, "like", use: likeHandler)
+        protectedRoutes.put(Article.parameter, "unlike", use: unlikeHandler)
         
         // Delete
         protectedRoutes.delete(Article.parameter, use: deleteHandler)
@@ -60,14 +61,12 @@ struct ArticlesController: RouteCollection {
     }
 
     func getHandler(_ req: Request) throws -> Future<ArticleDetails> {
-        let userID = try req.requireAuthenticated(User.self).requireID()
-        return try req
-            .parameters
-            .next(Article.self)
-            .map(to: ArticleDetails.self, { (article) in
-                let isLikedByCurrentUser = article.likedBy.first(where: { $0 == userID }) != nil
-                return ArticleDetails(article: article, isLikedByCurrentUser: isLikedByCurrentUser)
-            })
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).then { article in
+            return user.likes.isAttached(article, on: req).map(to: ArticleDetails.self) { hasLikedBefore in
+                return ArticleDetails(article: article, isLikedByCurrentUser: hasLikedBefore)
+            }
+        }
     }
     
     func searchHandler(_ req: Request) throws -> Future<[Article]> {
@@ -145,22 +144,32 @@ struct ArticlesController: RouteCollection {
             })
     }
     
-    func didLikeHandler(_ req: Request) throws -> Future<ArticleDetails> {
-        return try flatMap(to: ArticleDetails.self, req.parameters.next(Article.self), req.content.decode(LikeData.self), { (article, likeData) in
-            if let index = article.likedBy.index(where: { $0 == likeData.userID }) {
-                article.likedBy.remove(at: index)
-            } else {
-                article.likedBy.append(likeData.userID)
+    func likeHandler(_ req: Request) throws -> Future<ArticleDetails> {
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).flatMap(to: ArticleDetails.self) { article in
+            return article.likers.attach(user, on: req).flatMap(to: ArticleDetails.self) { pivot in
+                article.numberOfLikes += 1
+                return article.save(on: req).map(to: ArticleDetails.self, { (article) in
+                    return ArticleDetails(article: article, isLikedByCurrentUser: true)
+                })
             }
-            return article.save(on: req).map(to: ArticleDetails.self, { article in
-                return ArticleDetails(article: article, isLikedByCurrentUser: article.likedBy.contains(likeData.userID))
-            })
-        })
-        
+        }
     }
-
+    
+    func unlikeHandler(_ req: Request) throws -> Future<ArticleDetails> {
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).flatMap(to: ArticleDetails.self) { (article) in
+            return article.likers.detach(user, on: req).flatMap(to: ArticleDetails.self) { _ in
+                guard article.numberOfLikes > 0 else { throw Abort(.expectationFailed) }
+                article.numberOfLikes -= 1
+                return article.save(on: req).map(to: ArticleDetails.self, { (article) in
+                    return ArticleDetails(article: article, isLikedByCurrentUser: false)
+                })
+            }
+        }
+    }
+    
     // MARK: - Delete
-
     func deleteHandler(_ req: Request) throws -> Future<HTTPStatus> {
         return try req // 1 ~> we grab the request
             .parameters // 2 ~> we cut it down to get the parameter (...articles/`1`)

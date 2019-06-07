@@ -110,7 +110,7 @@ final class ArticleTests: XCTestCase {
         
         XCTAssertEqual(returnedArticle.numberOfLikes, 1)
         
-        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/unlike", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
         let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
         
@@ -121,13 +121,9 @@ final class ArticleTests: XCTestCase {
         let newUser = try User.create(on: conn)
         let article = try Article.create(title: articleTitle, details: articleDetails, user: newUser, on: conn)
         
-        let likeData = LikeData(userID: newUser.id!)
-        
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
-                            headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
+                            headers: ["Content-Type": "application/json"], loggedInUser: newUser)
         let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
-        
-        
         
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
         XCTAssertTrue(returnedArticle.isLikedByCurrentUser)
@@ -146,7 +142,7 @@ final class ArticleTests: XCTestCase {
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
         XCTAssertEqual(returnedArticle.isLikedByCurrentUser, true)
         
-        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
+        try app.sendRequest(to: "\(articlesURI)/\(article.id!)/unlike", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
         let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
         

@@ -24,14 +24,25 @@ struct UserController: RouteCollection {
         // MARK: Protected Routes
         let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
         let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
+        
+        // Create
         basicAuthGroup.post("login", use: loginHandler)
         
-        // Update
-        basicAuthGroup.put(User.parameter, use: updateHandler)
-        basicAuthGroup.put(User.parameter, "profilePicture", use: addProfilePictureHandler)
+        let tokenAuthMiddleware = User.tokenAuthMiddleware()
+        let guardAuthMidlleware = User.guardAuthMiddleware()
+        let protectedRoutes = usersRoutes.grouped([tokenAuthMiddleware, guardAuthMidlleware])
+        
+        // Read
+        protectedRoutes.get("profile", use: getProfile)
+        protectedRoutes.get("profile/likes", use: getLikedArticles)
+        protectedRoutes.get("profile/authored", use: getAuthoredArticles)
         
         // Update
-        basicAuthGroup.delete(User.parameter, use: deleteHandler)
+        protectedRoutes.put(User.parameter, use: updateHandler)
+        protectedRoutes.put(User.parameter, "profilePicture", use: addProfilePictureHandler)
+        
+        // Update
+        protectedRoutes.delete(User.parameter, use: deleteHandler)
     }
     
     // MARK: - Create
@@ -55,6 +66,22 @@ struct UserController: RouteCollection {
         return try req.parameters.next(User.self).flatMap({ (user) in
             return try user.articles.query(on: req).all()
         })
+    }
+    
+    func getAuthoredArticles(_ req: Request) throws -> Future<[Article]> {
+        return try req.requireAuthenticated(User.self).save(on: req).flatMap(to: [Article].self) { user in
+            return try user.articles.query(on: req).all()
+        }
+    }
+    
+    func getLikedArticles(_ req: Request) throws -> Future<[Article]> {
+        return try req.requireAuthenticated(User.self).save(on: req).flatMap(to: [Article].self) { user in
+            return try user.likes.query(on: req).all()
+        }
+    }
+    
+    func getProfile(_ req: Request) throws -> Future<User.Public> {
+        return try req.requireAuthenticated(User.self).save(on: req).convertToPublic()
     }
     
     func loginHandler(_ req: Request) throws -> Future<Token> {
