@@ -60,11 +60,11 @@ struct ArticlesController: RouteCollection {
             .all() // 3 ~> We Specify to get everything
     }
 
-    func getHandler(_ req: Request) throws -> Future<ArticleDetails> {
+    func getHandler(_ req: Request) throws -> Future<Article.Details> {
         let user = try req.requireAuthenticated(User.self)
         return try req.parameters.next(Article.self).then { article in
-            return user.likes.isAttached(article, on: req).map(to: ArticleDetails.self) { hasLikedBefore in
-                return ArticleDetails(article: article, isLikedByCurrentUser: hasLikedBefore)
+            return user.likes.isAttached(article, on: req).map(to: Article.Details.self) { hasLikedBefore in
+                return Article.Details(article: article, isLikedByCurrentUser: hasLikedBefore)
             }
         }
     }
@@ -133,37 +133,36 @@ struct ArticlesController: RouteCollection {
         )
     }
     
-    func didReadHandler(_ req: Request) throws -> Future<ArticleDetails> {
-        let userID = try req.requireAuthenticated(User.self).requireID()
-        return try req.parameters.next(Article.self)
-            .flatMap(to: ArticleDetails.self, { (article) in
-                article.reads += 1
-                return article.save(on: req).map(to: ArticleDetails.self, { article in
-                    return ArticleDetails(article: article, isLikedByCurrentUser: article.likedBy.contains(userID))
-                })
-            })
+    func didReadHandler(_ req: Request) throws -> Future<Article.Details> {
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).flatMap(to: Article.Details.self) { (article) in
+            article.reads += 1
+            return map(to: Article.Details.self, article.save(on: req), article.likers.isAttached(user, on: req)) { article, isLikedByCurrentUser in
+                return Article.Details(article: article, isLikedByCurrentUser: isLikedByCurrentUser)
+            }
+        }
     }
     
-    func likeHandler(_ req: Request) throws -> Future<ArticleDetails> {
+    func likeHandler(_ req: Request) throws -> Future<Article.Details> {
         let user = try req.requireAuthenticated(User.self)
-        return try req.parameters.next(Article.self).flatMap(to: ArticleDetails.self) { article in
-            return article.likers.attach(user, on: req).flatMap(to: ArticleDetails.self) { pivot in
+        return try req.parameters.next(Article.self).flatMap(to: Article.Details.self) { article in
+            return article.likers.attach(user, on: req).flatMap(to: Article.Details.self) { pivot in
                 article.numberOfLikes += 1
-                return article.save(on: req).map(to: ArticleDetails.self, { (article) in
-                    return ArticleDetails(article: article, isLikedByCurrentUser: true)
+                return article.save(on: req).map(to: Article.Details.self, { (article) in
+                    return Article.Details(article: article, isLikedByCurrentUser: true)
                 })
             }
         }
     }
     
-    func unlikeHandler(_ req: Request) throws -> Future<ArticleDetails> {
+    func unlikeHandler(_ req: Request) throws -> Future<Article.Details> {
         let user = try req.requireAuthenticated(User.self)
-        return try req.parameters.next(Article.self).flatMap(to: ArticleDetails.self) { (article) in
-            return article.likers.detach(user, on: req).flatMap(to: ArticleDetails.self) { _ in
+        return try req.parameters.next(Article.self).flatMap(to: Article.Details.self) { (article) in
+            return article.likers.detach(user, on: req).flatMap(to: Article.Details.self) { _ in
                 guard article.numberOfLikes > 0 else { throw Abort(.expectationFailed) }
                 article.numberOfLikes -= 1
-                return article.save(on: req).map(to: ArticleDetails.self, { (article) in
-                    return ArticleDetails(article: article, isLikedByCurrentUser: false)
+                return article.save(on: req).map(to: Article.Details.self, { (article) in
+                    return Article.Details(article: article, isLikedByCurrentUser: false)
                 })
             }
         }
@@ -189,11 +188,6 @@ struct ArticlesController: RouteCollection {
 struct ArticleCreateData: Content {
     let title: String
     let details: String
-}
-
-struct ArticleDetails: Content {
-    let article: Article
-    let isLikedByCurrentUser: Bool
 }
 
 struct LikeData: Content {

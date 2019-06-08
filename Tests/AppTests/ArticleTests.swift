@@ -68,7 +68,7 @@ final class ArticleTests: XCTestCase {
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: updatedArticle, loggedInUser: newUser)
         
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.title, newTitle)
         XCTAssertEqual(returnedArticle.details, updatedArticle.details)
@@ -80,7 +80,7 @@ final class ArticleTests: XCTestCase {
         let newUser = try User.create(on: conn)
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/read", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: article, loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.reads, 1)
     }
@@ -93,7 +93,7 @@ final class ArticleTests: XCTestCase {
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.numberOfLikes, 1)
     }
@@ -106,13 +106,13 @@ final class ArticleTests: XCTestCase {
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle.numberOfLikes, 1)
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/unlike", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
-        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser).article
+        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser).article
         
         XCTAssertEqual(returnedArticle2.numberOfLikes, 0)
     }
@@ -123,7 +123,7 @@ final class ArticleTests: XCTestCase {
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
                             headers: ["Content-Type": "application/json"], loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser)
         
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
         XCTAssertTrue(returnedArticle.isLikedByCurrentUser)
@@ -137,14 +137,14 @@ final class ArticleTests: XCTestCase {
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/like", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
-        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        let returnedArticle = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser)
         
         XCTAssertEqual(returnedArticle.article.numberOfLikes, 1)
         XCTAssertEqual(returnedArticle.isLikedByCurrentUser, true)
         
         try app.sendRequest(to: "\(articlesURI)/\(article.id!)/unlike", method: .PUT,
                             headers: ["Content-Type": "application/json"], data: likeData, loggedInUser: newUser)
-        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: newUser)
+        let returnedArticle2 = try app.getResponse(to: "\(articlesURI)/\(article.id!)", method: .GET, decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: newUser)
         
         XCTAssertEqual(returnedArticle2.article.numberOfLikes, 0)
         XCTAssertEqual(returnedArticle2.isLikedByCurrentUser, false)

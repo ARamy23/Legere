@@ -23,22 +23,24 @@ final class Article: Codable {
     /// Number of reads for this article
     var reads: Int
     
-    var likedBy: [User.ID] {
-        didSet {
-            numberOfLikes = likedBy.count
-        }
-    }
-    
     var numberOfLikes: Int
     
-    init(title: String, details: String, userID: User.ID, reads: Int = 0, likedBy: [User.ID] = []) {
+    var coverPicture: String?
+    
+    init(title: String, details: String, userID: User.ID, reads: Int = 0, numberOfLikes: Int = 0, coverPicture: String? = nil) {
         self.title = title
         self.details = details
         self.userID = userID
         self.reads = reads
-        self.likedBy = likedBy
-        self.numberOfLikes = likedBy.count
+        self.numberOfLikes = numberOfLikes
+        self.coverPicture = coverPicture
     }
+    
+    struct Details: Content {
+        let article: Article
+        let isLikedByCurrentUser: Bool
+    }
+
 }
 
 // extending the Article to a PostgreSQLModel here means that
