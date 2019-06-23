@@ -25,15 +25,15 @@ final class Article: Codable {
     
     var numberOfLikes: Int
     
-    var coverPicture: String?
+    var coverPhoto: String?
     
-    init(title: String, details: String, userID: User.ID, reads: Int = 0, numberOfLikes: Int = 0, coverPicture: String? = nil) {
+    init(title: String, details: String, userID: User.ID, reads: Int = 0, numberOfLikes: Int = 0, coverPhoto: String? = nil) {
         self.title = title
         self.details = details
         self.userID = userID
         self.reads = reads
         self.numberOfLikes = numberOfLikes
-        self.coverPicture = coverPicture
+        self.coverPhoto = coverPhoto
     }
     
     struct Details: Content {

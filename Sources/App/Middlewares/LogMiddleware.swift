@@ -21,15 +21,14 @@ final class LogMiddleware: Middleware {
     // This method logs the response for an incoming request using the response start date.
     func log(_ res: Response, start: Date, for req: Request) {
         let reqInfo = "\(req.http.method.string) \(req.http.url.path)"
-        let resInfo = "\(res.http.status.code) " +
-        "\(res.http.status.reasonPhrase)"
+        let resInfo = "\(res.http.status.code) " + "\(res.http.status.reasonPhrase)"
         
         // Generate a readable time using timeIntervalSince(_:) and the extension on TimeInterval at the bottom of the file.
         let time = Date()
             .timeIntervalSince(start)
             .readableMilliseconds
         // Log the information string.
-        logger.info("\(reqInfo) -> \(resInfo) [\(time)]")
+        logger.info("\(reqInfo) -> \(resInfo) [\(time)]\n")
     }
 }
 // Allow LogMiddleware to be registered as a service in your application.

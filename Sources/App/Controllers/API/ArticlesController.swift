@@ -40,8 +40,8 @@ struct ArticlesController: RouteCollection {
     // MARK: - Create
 
     func createHandler(_ req: Request, articleData: ArticleCreateData) throws -> Future<Article> {
-        let user = try req.requireAuthenticated(User.self)
-        let article = try Article(title: articleData.title, details: articleData.details, userID: user.requireID(), reads: 0)
+        let userID = try req.requireAuthenticated(User.self).requireID()
+        let article = Article(title: articleData.title, details: articleData.details, userID: userID, reads: 0, numberOfLikes: 0, coverPhoto: articleData.coverPhoto)
         return article.save(on: req)
     }
     
@@ -188,6 +188,7 @@ struct ArticlesController: RouteCollection {
 struct ArticleCreateData: Content {
     let title: String
     let details: String
+    let coverPhoto: String?
 }
 
 struct LikeData: Content {
