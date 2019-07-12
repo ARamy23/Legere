@@ -96,7 +96,7 @@ final class UserTests: XCTestCase {
         let user = try User.create(on: conn)
         let article = try Article.create(on: conn)
         // When
-        _ = try app.getResponse(to: "api/articles/\(article.id!)/like", method: .PUT, headers: ["Content-Type": "application/json"], decodeTo: ArticleDetails.self, loggedInRequest: true, loggedInUser: user)
+        _ = try app.getResponse(to: "api/articles/\(article.id!)/like", method: .PUT, headers: ["Content-Type": "application/json"], decodeTo: Article.Details.self, loggedInRequest: true, loggedInUser: user)
         
         // Then
         let likedArticles = try app.getResponse(to: "\(usersURI)profile/likes", method: .GET, headers: ["Content-Type": "application/json"], decodeTo: [Article].self, loggedInRequest: true, loggedInUser: user)
