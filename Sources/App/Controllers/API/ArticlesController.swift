@@ -54,10 +54,17 @@ struct ArticlesController: RouteCollection {
 
     // MARK: - Read
 
-    func getAllHandler(_ req: Request) throws -> Future<[Article]> {
-        return Article // 1 ~> We get the Entity called `Article`
-            .query(on: req) // 2 ~> We Query on that is in our PostgreSQL DB
-            .all() // 3 ~> We Specify to get everything
+    func getAllHandler(_ req: Request) throws -> Future<[ArticleWithAuthor]> {
+        return Article
+            .query(on: req)
+            .join(\User.id, to: \Article.userID)
+            .alsoDecode(User.self)
+            .all()
+            .map { articleUserPairs in
+                articleUserPairs.map { article, user in
+                    ArticleWithAuthor(article: article, author: user.convertToPublic())
+                }
+        }
     }
 
     func getHandler(_ req: Request) throws -> Future<Article.Details> {
@@ -193,4 +200,9 @@ struct ArticleCreateData: Content {
 
 struct LikeData: Content {
     let userID: User.ID
+}
+
+struct ArticleWithAuthor: Content {
+    let article: Article
+    let author: User.Public
 }
