@@ -86,3 +86,10 @@ extension Article {
         return siblings()
     }
 }
+
+// MARK: - Comments Relation
+extension Article {
+    var comments: Children<Article, Comment> {
+        return children(\.articleID)
+    }
+}

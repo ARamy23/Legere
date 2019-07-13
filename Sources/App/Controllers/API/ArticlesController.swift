@@ -12,6 +12,7 @@ struct ArticlesController: RouteCollection {
         articlesRoutes.get(Article.parameter, "user", use: getUserHandler)
         articlesRoutes.get("search", use: searchHandler)
         articlesRoutes.get(Article.parameter, "categories", use: getCategoriesHandler)
+        articlesRoutes.get(Article.parameter, "comments", use: getCommentsHandler)
         
         // MARK: Protected Routes
         let tokenAuthMiddleware = User.tokenAuthMiddleware()
@@ -31,6 +32,8 @@ struct ArticlesController: RouteCollection {
         protectedRoutes.put(Article.parameter, "read", use: didReadHandler)
         protectedRoutes.put(Article.parameter, "like", use: likeHandler)
         protectedRoutes.put(Article.parameter, "unlike", use: unlikeHandler)
+        protectedRoutes.put(Article.parameter, "comments", Comment.parameter, "like", use: commentLikeHandler)
+        protectedRoutes.put(Article.parameter, "comments", Comment.parameter, "unlike", use: commentUnlikeHandler)
         
         // Delete
         protectedRoutes.delete(Article.parameter, use: deleteHandler)
@@ -118,6 +121,17 @@ struct ArticlesController: RouteCollection {
             try article.categories.query(on: req).all()
         }
     }
+    
+    func getCommentsHandler(_ req: Request) throws -> Future<[Comment.CommentDetails]> {
+        let user = try req.requireAuthenticated(User.self).convertToPublic()
+        return try req.parameters.next(Article.self).flatMap(to: [Comment.CommentDetails].self) { (article) in
+            return try article.comments.query(on: req).all().map({ (comments) -> ([Comment.CommentDetails]) in
+                comments.map { comment in
+                    return Comment.CommentDetails(user: user, comment: comment)
+                }
+            })
+        }
+    }
 
     // MARK: - Update
 
@@ -170,6 +184,35 @@ struct ArticlesController: RouteCollection {
                 article.numberOfLikes -= 1
                 return article.save(on: req).map(to: Article.Details.self, { (article) in
                     return Article.Details(article: article, isLikedByCurrentUser: false)
+                })
+            }
+        }
+    }
+    
+    func commentLikeHandler(_ req: Request) throws -> Future<Comment.CommentDetails> {
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).flatMap(to: Comment.CommentDetails.self) { (article) in
+            return try req.parameters.next(Comment.self).flatMap(to: Comment.CommentDetails.self) { (comment) in
+                return comment.likers.attach(user, on: req).flatMap(to: Comment.CommentDetails.self, { (_) -> Future<Comment.CommentDetails> in
+                    comment.likes += 1
+                    return comment.save(on: req).map(to: Comment.CommentDetails.self, { (comment) in
+                        return Comment.CommentDetails(user: user.convertToPublic(), comment: comment)
+                    })
+                })
+            }
+        }
+    }
+    
+    func commentUnlikeHandler(_ req: Request) throws -> Future<Comment.CommentDetails> {
+        let user = try req.requireAuthenticated(User.self)
+        return try req.parameters.next(Article.self).flatMap(to: Comment.CommentDetails.self) { (article) in
+            return try req.parameters.next(Comment.self).flatMap(to: Comment.CommentDetails.self) { (comment) in
+                return comment.likers.detach(user, on: req).flatMap(to: Comment.CommentDetails.self, { (_) -> Future<Comment.CommentDetails> in
+                    guard comment.likes > 0 else { throw Abort(.expectationFailed) }
+                    comment.likes -= 1
+                    return comment.save(on: req).map(to: Comment.CommentDetails.self, { (comment) in
+                        return Comment.CommentDetails(user: user.convertToPublic(), comment: comment)
+                    })
                 })
             }
         }

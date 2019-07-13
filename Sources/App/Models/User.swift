@@ -93,6 +93,12 @@ extension User {
     }
 }
 
+extension User {
+    var commentLikes: Siblings<User, Comment, CommentLikesPivot> {
+        return siblings()
+    }
+}
+
 struct AdminUser: Migration {
     typealias Database = PostgreSQLDatabase
     

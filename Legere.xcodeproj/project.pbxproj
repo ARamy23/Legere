@@ -32,6 +32,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B87525EF22D8D496002BE7CF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87525EE22D8D496002BE7CF /* Comment.swift */; };
+		B87525F322D8DDEB002BE7CF /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87525F222D8DDEB002BE7CF /* CommentController.swift */; };
+		B87525F522D923AF002BE7CF /* CommentLikesPivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87525F422D923AF002BE7CF /* CommentLikesPivot.swift */; };
 		B8E8DF2222AAB93500AB4808 /* LikesPivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E8DF2122AAB93500AB4808 /* LikesPivot.swift */; };
 		OBJ_1040 /* ArticlesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ArticlesController.swift */; };
 		OBJ_1041 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CategoryController.swift */; };
@@ -1423,6 +1426,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B87525EA22D8B4B0002BE7CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Legere::App";
+			remoteInfo = App;
+		};
+		B87525EB22D8B4B0002BE7CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Legere::AppTests";
+			remoteInfo = AppTests;
+		};
 		B8E8DCAF22AA81A500AB4808 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -5767,6 +5784,9 @@
 
 /* Begin PBXFileReference section */
 		"Auth::Authentication::Product" /* Authentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B87525EE22D8D496002BE7CF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		B87525F222D8DDEB002BE7CF /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
+		B87525F422D923AF002BE7CF /* CommentLikesPivot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLikesPivot.swift; sourceTree = "<group>"; };
 		B8E8DF2122AAB93500AB4808 /* LikesPivot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesPivot.swift; sourceTree = "<group>"; };
 		"Console::Command::Product" /* Command.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Command.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7561,6 +7581,7 @@
 				OBJ_11 /* ArticlesController.swift */,
 				OBJ_12 /* CategoryController.swift */,
 				OBJ_13 /* UserController.swift */,
+				B87525F222D8DDEB002BE7CF /* CommentController.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -7752,6 +7773,8 @@
 				OBJ_22 /* Token.swift */,
 				OBJ_23 /* User.swift */,
 				B8E8DF2122AAB93500AB4808 /* LikesPivot.swift */,
+				B87525EE22D8D496002BE7CF /* Comment.swift */,
+				B87525F422D923AF002BE7CF /* CommentLikesPivot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -8577,7 +8600,7 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -8591,7 +8614,6 @@
 				OBJ_1033 /* web.Dockerfile */,
 				OBJ_1034 /* CONTRIBUTING.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_507 /* Utilities */ = {
@@ -11853,7 +11875,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_981 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -11940,16 +11962,19 @@
 			buildActionMask = 0;
 			files = (
 				B8E8DF2222AAB93500AB4808 /* LikesPivot.swift in Sources */,
+				B87525F322D8DDEB002BE7CF /* CommentController.swift in Sources */,
 				OBJ_1040 /* ArticlesController.swift in Sources */,
 				OBJ_1041 /* CategoryController.swift in Sources */,
 				OBJ_1042 /* UserController.swift in Sources */,
 				OBJ_1043 /* WebsiteController.swift in Sources */,
 				OBJ_1044 /* LogMiddleware.swift in Sources */,
+				B87525F522D923AF002BE7CF /* CommentLikesPivot.swift in Sources */,
 				OBJ_1045 /* Article.swift in Sources */,
 				OBJ_1046 /* ArticleCategoryPivot.swift in Sources */,
 				OBJ_1047 /* Category.swift in Sources */,
 				OBJ_1048 /* Token.swift in Sources */,
 				OBJ_1049 /* User.swift in Sources */,
+				B87525EF22D8D496002BE7CF /* Comment.swift in Sources */,
 				OBJ_1050 /* app.swift in Sources */,
 				OBJ_1051 /* boot.swift in Sources */,
 				OBJ_1052 /* configure.swift in Sources */,
@@ -14795,12 +14820,12 @@
 		OBJ_2241 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Legere::App" /* App */;
-			targetProxy = "Legere::App" /* App */;
+			targetProxy = B87525EA22D8B4B0002BE7CF /* PBXContainerItemProxy */;
 		};
 		OBJ_2252 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Legere::AppTests" /* AppTests */;
-			targetProxy = "Legere::AppTests" /* AppTests */;
+			targetProxy = B87525EB22D8B4B0002BE7CF /* PBXContainerItemProxy */;
 		};
 		OBJ_2275 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
